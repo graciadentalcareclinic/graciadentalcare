@@ -58,7 +58,7 @@ const Promo: React.FC = () => {
         {selected.length > 0 && (
           <div className="mb-8" id="selected-promos">
             <h2 className="text-xl font-semibold mb-2">{t('promo.selectedHeading')}</h2>
-            <ul className="list-disc ml-6">
+            <ol className="list-decimal ml-6">
               {[...new Set(selected)].map((promoKey, idx) => (
                 <li
                   key={idx}
@@ -68,11 +68,16 @@ const Promo: React.FC = () => {
                   {t(promoKey)}
                 </li>
               ))}
-            </ul>
+            </ol>
           </div>
         )}
         <div className="mt-12 mb-6">
-          <BookAppointmentForm doctorId={0} doctorName="" selectedServices={selected} />
+          <BookAppointmentForm 
+            key={selected.join('-')}
+            doctorId={0} 
+            doctorName="" 
+            selectedServices={selected} 
+          />
         </div>
       </div>
       <FloatingMenu

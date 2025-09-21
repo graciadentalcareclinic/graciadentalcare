@@ -94,7 +94,15 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({ doctorId, doc
   const timeZone = 'Asia/Jakarta';
   const zonedDate = toZonedTime(data.date, timeZone);
   const formattedDate = tzFormat(zonedDate, 'PPP', { timeZone });
-    let message = `New Appointment Request:%0AName: ${data.name}%0APhone: ${data.phone}%0ADate: ${formattedDate} (Asia/Jakarta)%0ATime: ${data.time}%0ADoctor: ${doctorName}%0AReason: ${data.reason}`;
+    let message = `*New Appointment Request*\n\n` +
+      `*Name:* ${data.name}\n` +
+      `*Phone Number:* ${data.phone}\n` +
+      `*Date:* ${formattedDate} (Asia/Jakarta)\n` +
+      `*Time:* ${data.time}\n` +
+      `*Reason:* ${data.reason}`;
+    if (data.hearAbout) {
+      message += `\n*How did you hear about us?:* ${data.hearAbout}`;
+    }
     if (Array.isArray(uniqueSelectedServices) && uniqueSelectedServices.length > 0) {
       const PROMOS = [
         'Promo Kids First Dental Visit',
@@ -114,13 +122,15 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({ doctorId, doc
         message += `%0ASelected Promos:%0A- ${promos.join('%0A- ')}`;
       }
     }
-  const whatsappUrl = `https://wa.me/6285210121788?text=${message}`;
-    window.open(whatsappUrl, '_blank');
+  const encodedMessage = encodeURIComponent(message);
+  const whatsappUrl = `https://wa.me/6285210121788?text=${encodedMessage}`;
+  window.open(whatsappUrl, '_blank');
   };
 
   const onSubmit = async (data: FormValues) => {
-    setModalData(data);
-    setShowModal(true);
+    // Force send to WhatsApp regardless of validation
+    sendToWhatsApp(data);
+    form.reset();
   };
   const handleContinue = () => {
     if (modalData) {
@@ -154,20 +164,6 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({ doctorId, doc
 
   return (
     <div className="mt-6">
-      <ValidationModal
-        open={showModal}
-        onContinue={handleContinue}
-        onGoBack={handleGoBack}
-        formData={modalData || {}}
-        fields={modalData ? [
-          { label: t('appointment.name'), value: modalData.name },
-          { label: t('appointment.phone'), value: modalData.phone },
-          { label: t('appointment.date'), value: modalData.date ? format(modalData.date, 'PPP') : '' },
-          { label: t('appointment.time'), value: modalData.time },
-          { label: t('promo.hearAbout'), value: modalData.hearAbout ? t(`promo.hearAbout.${modalData.hearAbout}`) : '' },
-          ...(doctorName ? [{ label: t('appointment.doctor'), value: doctorName }] : []),
-        ] : []}
-      />
       {/* Only the highlighted selected services list remains below the service selection */}
       {uniqueSelectedServices.length > 0 && !showModal && (
         <div className="mb-6">
@@ -186,7 +182,7 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({ doctorId, doc
         </div>
       )}
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+        <form onSubmit={e => { e.preventDefault(); onSubmit(form.getValues()); }} className="space-y-6">
           <FormField
             control={form.control}
             name="name"
@@ -355,7 +351,8 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({ doctorId, doc
             name="time"
             render={({ field }) => {
               const availableTimes = getAvailableTimesForDate(form.watch('date'));
-              const selectedIdx = availableTimes.findIndex(t => t === field.value);
+              let selectedIdx = availableTimes.findIndex(t => t === field.value);
+              if (selectedIdx === -1 && availableTimes.length > 0) selectedIdx = 0;
               const prevIdx = selectedIdx > 0 ? selectedIdx - 1 : availableTimes.length - 1;
               const nextIdx = selectedIdx < availableTimes.length - 1 ? selectedIdx + 1 : 0;
 
@@ -373,8 +370,14 @@ const BookAppointmentForm: React.FC<BookAppointmentFormProps> = ({ doctorId, doc
                 return () => document.removeEventListener('mousedown', handleClick);
               }, [open]);
 
-              const handleUp = () => field.onChange(availableTimes[prevIdx]);
-              const handleDown = () => field.onChange(availableTimes[nextIdx]);
+              const handleUp = () => {
+                if (availableTimes.length === 0) return;
+                field.onChange(availableTimes[prevIdx]);
+              };
+              const handleDown = () => {
+                if (availableTimes.length === 0) return;
+                field.onChange(availableTimes[nextIdx]);
+              };
               const handleKeyDown = (e: React.KeyboardEvent) => {
                 if (open) {
                   if (e.key === 'ArrowDown') {
