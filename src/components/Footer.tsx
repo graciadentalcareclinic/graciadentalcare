@@ -2,7 +2,7 @@
 
 const Footer = () => {
   return (
-    <footer id="contacts" className="bg-white pt-16 pb-8">
+  <footer id="contacts" className="bg-white pt-16 pb-14">
       <div className="container-padding mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
@@ -50,31 +50,44 @@ const Footer = () => {
             </ul>
           </div>
           
-          <div>
-            <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
-            <address className="not-italic">
-              <div className="mb-2 text-gray-600">
-                <strong>Address:</strong> Jl. Kavling Polri No.1606 Blok F8, RT.8/RW.2, Jelambar, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460
-              </div>
-              <div className="mb-2 text-gray-600">
-                <strong>Phone:</strong> <a href="tel:+62215658561" className="hover:text-black">(021) 5658561</a>
-              </div>
-              <div className="mb-2 text-gray-600">
-                <strong>Email:</strong> <a href="mailto:info@graciadentalcare.com" className="hover:text-black">info@graciadentalcare.com</a>
-              </div>
-              <div className="text-gray-600">
-                <strong>Jam Praktek:</strong><br />
-                Senin, Selasa, Kamis : 10.00-21.00<br />
-                Rabu, Jumat : 10.00-17.00
-              </div>
-            </address>
+          <div className="col-span-1 md:col-span-2 lg:col-span-1 flex flex-col items-center justify-center">
+            <div className="text-center">
+              <div className="font-bold text-lg md:text-xl mb-1 text-sky-700">Gracia Dental Care</div>
+              <div className="text-gray-700 mb-1 text-sm md:text-base">Jl. Kavling Polri No.1606 Blok F8, RT.8/RW.2, Jelambar, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460</div>
+              <div className="text-gray-700 mb-1 text-sm md:text-base"><strong>Phone:</strong> <a href="tel:+62215658561" className="text-sky-600 hover:underline">(021) 5658561</a></div>
+              <div className="text-gray-700 mb-1 text-sm md:text-base"><strong>Email:</strong> <a href="mailto:info@graciadentalcare.com" className="text-sky-600 hover:underline">info@graciadentalcare.com</a></div>
+              <div className="text-gray-700 text-sm md:text-base"><strong>Jam Praktek:</strong> Senin, Selasa, Kamis : 10.00-21.00 | Rabu, Jumat : 10.00-17.00</div>
+            </div>
           </div>
         </div>
         
+        {/* Location heading and map visible on all devices */}
+        <div className="flex flex-col items-center justify-center mt-8">
+          <h4 className="font-semibold text-lg md:text-xl mb-4 text-sky-700 tracking-wide">Location</h4>
+          <iframe
+            title="Gracia Dental Care Location"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.669964073964!2d106.7829640758706!3d-6.176212160536019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f6e2e2e2e2e3%3A0x7e7e7e7e7e7e7e7e!2sGracia%20Dental%20Care!5e0!3m2!1sen!2sid!4v1695370000000!5m2!1sen!2sid"
+            width="100%"
+            height="220"
+            className="max-w-xl w-full rounded-2xl border-0"
+            style={{ border: 0, borderRadius: '1rem' }}
+            allowFullScreen={true}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          ></iframe>
+        </div>
+
         <hr className="my-8 border-gray-200" />
-        
-        <div className="text-center text-gray-600">
-          <p>© {new Date().getFullYear()} Gracia Dental Care. All Rights Reserved. Design by <a href="https://graciadentalcare.com" className="text-black hover:underline">graciadentalcare</a>. Website: <a href="https://graciadentalcare.com" className="text-black hover:underline">graciadentalcare.com</a></p>
+
+        <div className="flex flex-col items-center justify-center">
+          {/* Mobile language toggle */}
+          <div className="block md:hidden mb-4">
+            <LanguageToggleFooter />
+          </div>
+          <div className="text-center text-gray-700 text-sm md:text-base font-medium max-w-xl w-full">
+            © {new Date().getFullYear()} Gracia Dental Care. All Rights Reserved.<br />
+            <span className="text-xs md:text-sm text-gray-500">Design by <a href="https://graciadentalcare.com" className="text-sky-700 hover:underline">graciadentalcare</a>. Website: <a href="https://graciadentalcare.com" className="text-sky-700 hover:underline">graciadentalcare.com</a></span>
+          </div>
         </div>
       </div>
     </footer>
@@ -82,3 +95,4 @@ const Footer = () => {
 };
 
 export default Footer;
+import LanguageToggleFooter from './LanguageToggleFooter';

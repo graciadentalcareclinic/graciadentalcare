@@ -1,5 +1,6 @@
 
 import React from 'react';
+import SectionHeading from './SectionHeading';
 import { Star } from 'lucide-react';
 
 type Testimonial = {
@@ -41,7 +42,7 @@ const TestimonialsSection = () => {
         <div className="text-center mb-6">
           <span className="text-sm font-medium uppercase tracking-wider text-gray-500">TESTIMONIALS</span>
         </div>
-        <h2 className="section-title text-center">What Our Patients Say</h2>
+  <SectionHeading>What Our Patients Say</SectionHeading>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
           {testimonials.map((testimonial) => (
@@ -50,7 +51,7 @@ const TestimonialsSection = () => {
                 <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
                   <img 
                     src={testimonial.image} 
-                    alt={testimonial.name} 
+                    alt={`Photo of ${testimonial.name}, patient testimonial`} 
                     className="w-full h-full object-cover"
                   />
                 </div>

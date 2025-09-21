@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SectionHeading from './SectionHeading';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
@@ -90,7 +91,7 @@ const DoctorsSection = () => {
             OUR DOCTORS
           </span>
         </div>
-        <h2 className="section-title text-center">Dental Experts You Can Trust</h2>
+  <SectionHeading>Dental Experts You Can Trust</SectionHeading>
 
         <div className="flex flex-wrap justify-center gap-4 mt-10 mb-8">
           <Button
@@ -124,28 +125,38 @@ const DoctorsSection = () => {
         </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 mt-8">
-          {filteredDoctors.map((doctor) => (
-            <div
-              key={doctor.id}
-              className="card-with-shadow overflow-hidden group cursor-pointer"
-              onClick={() => handleDoctorClick(doctor.id)}
-            >
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <img
-                  src={doctor.image}
-                  alt={doctor.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
+          {filteredDoctors.map((doctor, idx) => {
+            // Assign a different bg color per card
+            const bgColors = [
+              'bg-blue-100',
+              'bg-green-100',
+              'bg-yellow-100',
+              'bg-pink-100',
+            ];
+            const cardBg = bgColors[idx % bgColors.length];
+            return (
+              <div
+                key={doctor.id}
+                className={`card-with-shadow overflow-hidden group cursor-pointer ${cardBg}`}
+                onClick={() => handleDoctorClick(doctor.id)}
+              >
+                <div className="relative aspect-[3/4] overflow-hidden">
+                  <img
+                    src={doctor.image}
+                    alt={doctor.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                </div>
+                <div className="p-4 text-center">
+                  <h3 className="font-semibold text-lg">{doctor.name}</h3>
+                  <p className="text-gray-600">{doctor.role}</p>
+                  <p className="text-sm text-gray-500 mt-2">
+                    Available: {doctor.availableDays.join(", ")}
+                  </p>
+                </div>
               </div>
-              <div className="p-4 text-center">
-                <h3 className="font-semibold text-lg">{doctor.name}</h3>
-                <p className="text-gray-600">{doctor.role}</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Available: {doctor.availableDays.join(", ")}
-                </p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
         <div className="mt-12 text-center flex flex-col md:flex-row justify-center items-center gap-4">

@@ -58,6 +58,7 @@ const SERVICES = [
 
 const ServicesTable: React.FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
+  const [category, setCategory] = useState<string>('All');
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
 
   const handleAdd = (service: string) => {
@@ -85,8 +86,26 @@ const ServicesTable: React.FC = () => {
     <div className="min-h-screen">
       <Navbar />
       <div className="container-padding mx-auto py-12">
-  <h1 className="text-2xl md:text-3xl font-bold mb-6 mt-4 md:mt-0">Dental Services</h1>
-      <div className="mb-8">
+        <h1 className="text-2xl md:text-3xl font-bold mb-6 mt-6 md:mt-8">Dental Services</h1>
+        {/* Category Filter */}
+        <div className="mb-8 flex flex-wrap gap-2 items-center">
+          <span className="uppercase tracking-wide text-xs font-semibold text-sky-700 mr-2">Category</span>
+          <button
+            className={`px-3 py-1 rounded-full border text-sm font-medium transition-colors ${category === 'All' ? 'bg-sky-700 text-white' : 'bg-white text-gray-700 border-gray-300 hover:bg-sky-100'}`}
+            onClick={() => setCategory('All')}
+          >
+            All
+          </button>
+          {Array.from(new Set(SERVICES.map(s => s.category))).map(cat => (
+            <button
+              key={cat}
+              className={`px-3 py-1 rounded-full border text-sm font-medium transition-colors ${category === cat ? 'bg-sky-700 text-white' : 'bg-white text-gray-700 border-gray-300 hover:bg-sky-100'}`}
+              onClick={() => setCategory(cat)}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
         {/* Table for desktop, cards for mobile */}
         <div className="hidden sm:block">
           <table className="min-w-full bg-white border rounded-lg shadow">
@@ -99,16 +118,18 @@ const ServicesTable: React.FC = () => {
               </tr>
             </thead>
             <tbody>
-              {SERVICES.map((svc, idx) => (
+              {SERVICES.filter(svc => category === 'All' || svc.category === category).map((svc, idx) => (
                 <tr key={idx} className="hover:bg-gray-50">
                   <td className="px-4 py-2 border-b">{svc.category}</td>
                   <td className="px-4 py-2 border-b">{svc.name}</td>
                   <td className="px-4 py-2 border-b">{svc.description}</td>
                   <td className="px-4 py-2 border-b">
                     {selected.includes(svc.name) ? (
-                      <Button variant="destructive" size="sm" onClick={() => handleRemove(svc.name)}>
-                        Remove
-                      </Button>
+                      <div className="flex justify-center">
+                        <Button variant="destructive" size="sm" onClick={() => handleRemove(svc.name)}>
+                          Remove
+                        </Button>
+                      </div>
                     ) : (
                       <Button variant="secondary" size="sm" onClick={() => handleAdd(svc.name)}>
                         Add Service
@@ -121,7 +142,7 @@ const ServicesTable: React.FC = () => {
           </table>
         </div>
         <div className="sm:hidden flex flex-col gap-4">
-          {SERVICES.map((svc, idx) => (
+          {SERVICES.filter(svc => category === 'All' || svc.category === category).map((svc, idx) => (
             <div key={idx} className="bg-white rounded-lg shadow p-4 border">
               <div className="text-xs text-gray-500 mb-1 font-semibold">{svc.category}</div>
               <div className="font-bold text-base mb-1">{svc.name}</div>
@@ -140,22 +161,21 @@ const ServicesTable: React.FC = () => {
             </div>
           ))}
         </div>
-      </div>
-      <div className="mb-8" id="selected-services">
-        <h2 className="text-xl font-semibold mb-2">Selected Services</h2>
-        {selected.length === 0 ? (
-          <p className="text-gray-500">No services selected yet.</p>
-        ) : (
-          <ul className="list-disc ml-6">
-            {selected.map((svc, idx) => (
-              <li key={idx}>{svc}</li>
-            ))}
-          </ul>
-        )}
-      </div>
-      <div className="mt-12">
-        <BookAppointmentForm doctorId={0} doctorName="" selectedServices={selected} />
-      </div>
+        <div className="mb-8" id="selected-services">
+          <h2 className="text-xl font-semibold mb-2">Selected Services</h2>
+          {selected.length === 0 ? (
+            <p className="text-gray-500">No services selected yet.</p>
+          ) : (
+            <ul className="list-disc ml-6">
+              {selected.map((svc, idx) => (
+                <li key={idx}>{svc}</li>
+              ))}
+            </ul>
+          )}
+        </div>
+        <div className="mt-12 mb-6">
+          <BookAppointmentForm doctorId={0} doctorName="" selectedServices={selected} />
+        </div>
       </div>
       <FloatingMenu
         onAppointmentClick={() => {

@@ -1,19 +1,23 @@
+import SectionHeading from './SectionHeading';
+import { useTranslation } from '@/lib/TranslationProvider';
+
 const AboutSection = () => {
+  const { t } = useTranslation();
   return (
     <section id="about" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-6">
           <span className="text-sm font-medium uppercase tracking-wider text-gray-500">
-            Why Choose Us
+            {t('about.whyChooseUs')}
           </span>
         </div>
-        <h2 className="text-center text-3xl font-bold mb-10">
-          Discover Why Gracia Dental Care is Your Best Choice
-        </h2>
+        <SectionHeading>
+          {t('about.headingMain')}
+        </SectionHeading>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Feature 1 */}
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-blue-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="bg-dental-blue w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
               {/* Icon */}
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
@@ -27,18 +31,15 @@ const AboutSection = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center">
-              Advanced Dental Technology
+              {t('about.feature1.title')}
             </h3>
             <p className="text-gray-600 text-center">
-              Our clinic is equipped with{" "}
-              <strong>state-of-the-art dental technology</strong> to ensure
-              accurate diagnostics and the most effective treatments for every
-              patient.
+              {t('about.feature1.desc1')} <strong>{t('about.feature1.desc2')}</strong> {t('about.feature1.desc3')}
             </p>
           </div>
 
           {/* Feature 2 */}
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-green-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="bg-dental-blue w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
               {/* Icon */}
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
@@ -70,17 +71,15 @@ const AboutSection = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center">
-              Experienced & Caring Professionals
+              {t('about.feature2.title')}
             </h3>
             <p className="text-gray-600 text-center">
-              Our <strong>highly experienced dentists</strong> combine medical
-              expertise with a gentle approach, ensuring your comfort during
-              every visit.
+              {t('about.feature2.desc1')} <strong>{t('about.feature2.desc2')}</strong> {t('about.feature2.desc3')}
             </p>
           </div>
 
           {/* Feature 3 */}
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-yellow-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="bg-dental-blue w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
               {/* Icon */}
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
@@ -97,17 +96,15 @@ const AboutSection = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center">
-              Pain-Free Dental Procedures
+              {t('about.feature3.title')}
             </h3>
             <p className="text-gray-600 text-center">
-              We prioritize your comfort by offering{" "}
-              <strong>pain-free dental treatments</strong> with modern sedation
-              and numbing techniques for a relaxed experience.
+              {t('about.feature3.desc1')} <strong>{t('about.feature3.desc2')}</strong> {t('about.feature3.desc3')}
             </p>
           </div>
 
           {/* Feature 4 */}
-          <div className="bg-white p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="bg-pink-100 p-6 rounded-lg shadow-lg hover:shadow-xl transition-shadow duration-300">
             <div className="bg-dental-blue w-16 h-16 rounded-full flex items-center justify-center mb-6 mx-auto">
               {/* Icon */}
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
@@ -124,12 +121,10 @@ const AboutSection = () => {
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-3 text-center">
-              Comprehensive Dental Services
+              {t('about.feature4.title')}
             </h3>
             <p className="text-gray-600 text-center">
-              From regular cleanings to{" "}
-              <strong>cosmetic and restorative dentistry</strong>, Gracia Dental Care
-              Clinic offers a full range of dental services under one roof.
+              {t('about.feature4.desc1')} <strong>{t('about.feature4.desc2')}</strong> {t('about.feature4.desc3')}
             </p>
           </div>
         </div>
