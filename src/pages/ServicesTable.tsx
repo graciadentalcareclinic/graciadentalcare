@@ -158,9 +158,12 @@ const ServicesTable: React.FC = () => {
       </div>
       </div>
       <FloatingMenu
-        onAppointmentClick={() => navigate('/services')}
-        onServicesClick={() => scrollToSection('selected-services')}
-        onPromoClick={() => scrollToSection('promo')}
+        onAppointmentClick={() => {
+          const form = document.querySelector('.mt-12');
+          if (form) form.scrollIntoView({ behavior: 'smooth', block: 'end' });
+        }}
+        onServicesClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        onPromoClick={() => navigate('/promo')}
       />
     </div>
   );

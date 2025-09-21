@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useToast } from "@/hooks/use-toast";
 import { format } from 'date-fns';
+import { toZonedTime, format as tzFormat } from 'date-fns-tz';
 import { Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -72,10 +73,29 @@ const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: Bo
 
 
   const sendToWhatsApp = (data: FormValues) => {
-    const formattedDate = format(data.date, 'PPP');
-    let message = `New Appointment Request:%0AName: ${data.name}%0APhone: ${data.phone}%0ADate: ${formattedDate}%0ATime: ${data.time}%0ADoctor: ${doctorName}%0AReason: ${data.reason}`;
+  const timeZone = 'Asia/Jakarta';
+  const zonedDate = toZonedTime(data.date, timeZone);
+  const formattedDate = tzFormat(zonedDate, 'PPP', { timeZone });
+    let message = `New Appointment Request:%0AName: ${data.name}%0APhone: ${data.phone}%0ADate: ${formattedDate} (Asia/Jakarta)%0ATime: ${data.time}%0ADoctor: ${doctorName}%0AReason: ${data.reason}`;
     if (Array.isArray(selectedServices) && selectedServices.length > 0) {
-      message += `%0ASelected Services:%0A- ${selectedServices.join('%0A- ')}`;
+      // List of all promos
+      const PROMOS = [
+        'Promo Kids First Dental Visit',
+        'Joyful Smile Scaling Treatment',
+        'Hollywood Smile Make Over',
+        'Best Choice Dental Implant',
+        'Kids First Dental Visit',
+        'Instant Teeth Whitening',
+        'Promo Pasang Behel',
+      ];
+      const promos = selectedServices.filter(item => PROMOS.includes(item));
+      const services = selectedServices.filter(item => !PROMOS.includes(item));
+      if (services.length > 0) {
+        message += `%0ASelected Services:%0A- ${services.join('%0A- ')}`;
+      }
+      if (promos.length > 0) {
+        message += `%0ASelected Promos:%0A- ${promos.join('%0A- ')}`;
+      }
     }
     const whatsappUrl = `https://wa.me/6289637507810?text=${message}`;
     window.open(whatsappUrl, '_blank');
@@ -98,6 +118,7 @@ const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: Bo
   };
 
   const getDoctorAvailability = () => {
+    if (doctorId === 0) return [0,1,2,3,4,5,6]; // Allow all days if no doctor selected
     const doctor = doctors.find(doc => doc.id === doctorId);
     return doctor?.availableDays || [];
   };

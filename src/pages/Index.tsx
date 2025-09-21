@@ -40,7 +40,7 @@ const Index = () => {
       <FloatingMenu
         onAppointmentClick={() => navigate('/services')}
         onServicesClick={() => navigate('/services')}
-        onPromoClick={() => scrollToSection('promo')}
+        onPromoClick={() => navigate('/promo')}
       />
       <Dialog open={showAppointmentModal} onOpenChange={setShowAppointmentModal}>
         <DialogContent>
