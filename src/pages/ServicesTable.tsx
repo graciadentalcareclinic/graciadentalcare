@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import FloatingMenu from '@/components/FloatingMenu';
+import { useNavigate } from 'react-router-dom';
 import BookAppointmentForm from '@/components/BookAppointmentForm';
 import { Button } from '@/components/ui/button';
 
@@ -79,6 +80,7 @@ const ServicesTable: React.FC = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -156,7 +158,7 @@ const ServicesTable: React.FC = () => {
       </div>
       </div>
       <FloatingMenu
-        onAppointmentClick={() => window.location.assign('/services')}
+        onAppointmentClick={() => navigate('/services')}
         onServicesClick={() => scrollToSection('selected-services')}
         onPromoClick={() => scrollToSection('promo')}
       />

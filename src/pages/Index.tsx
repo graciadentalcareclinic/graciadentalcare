@@ -11,6 +11,7 @@ import BookAppointmentCard from '@/components/BookAppointmentCard';
 import { Dialog, DialogContent } from '@/components/ui/dialog';
 import BookAppointmentForm from '@/components/BookAppointmentForm';
 import FloatingMenu from '@/components/FloatingMenu';
+import { useNavigate } from 'react-router-dom';
 
 const Index = () => {
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
@@ -21,6 +22,7 @@ const Index = () => {
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen">
       <Navbar />
@@ -36,8 +38,8 @@ const Index = () => {
       <TestimonialsSection />
       <Footer />
       <FloatingMenu
-        onAppointmentClick={() => window.location.assign('/services')}
-        onServicesClick={() => window.location.assign('/services')}
+        onAppointmentClick={() => navigate('/services')}
+        onServicesClick={() => navigate('/services')}
         onPromoClick={() => scrollToSection('promo')}
       />
       <Dialog open={showAppointmentModal} onOpenChange={setShowAppointmentModal}>
