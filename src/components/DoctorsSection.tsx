@@ -17,7 +17,7 @@ const doctors: Doctor[] = [
     name: "Charly Esmond Siagian",
     role: "Dokter Gigi Spesialis Periodonsia",
     category: "surgeon",
-  image: "./charly.png",
+  image: "/charly.png",
     availableDays: [
       "Senin 10:00 - 21:00",
       "Selasa 10:00 - 21:00",
