@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import ValidationModal from './ValidationModal';
+import { useTranslation } from '@/lib/TranslationProvider';
 import { useToast } from "@/hooks/use-toast";
 import { format } from 'date-fns';
 import { toZonedTime, format as tzFormat } from 'date-fns-tz';
@@ -59,7 +61,10 @@ const doctors = [
 
 const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: BookAppointmentFormProps) => {
   const { toast } = useToast();
+  const { t } = useTranslation();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [modalData, setModalData] = useState<FormValues | null>(null);
   
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -102,19 +107,32 @@ const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: Bo
   };
 
   const onSubmit = async (data: FormValues) => {
-    setIsSubmitting(true);
-    try {
-      sendToWhatsApp(data);
-      form.reset();
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "There was an error booking your appointment. Please try again.",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSubmitting(false);
+    setModalData(data);
+    setShowModal(true);
+  };
+
+  const handleContinue = () => {
+    if (modalData) {
+      setIsSubmitting(true);
+      try {
+        sendToWhatsApp(modalData);
+        form.reset();
+        setShowModal(false);
+        setModalData(null);
+      } catch (error) {
+        toast({
+          title: "Error",
+          description: t('validationModal.error') || "There was an error booking your appointment. Please try again.",
+          variant: "destructive",
+        });
+      } finally {
+        setIsSubmitting(false);
+      }
     }
+  };
+
+  const handleGoBack = () => {
+    setShowModal(false);
   };
 
   const getDoctorAvailability = () => {
@@ -125,6 +143,21 @@ const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: Bo
 
   return (
     <div className="mt-6">
+      <ValidationModal
+        open={showModal}
+        onContinue={handleContinue}
+        onGoBack={handleGoBack}
+        formData={modalData || {}}
+        fields={modalData ? [
+          { label: t('appointment.name'), value: modalData.name },
+          { label: t('appointment.phone'), value: modalData.phone },
+          { label: t('appointment.date'), value: modalData.date ? format(modalData.date, 'PPP') : '' },
+          { label: t('appointment.time'), value: modalData.time },
+          { label: t('appointment.reason'), value: modalData.reason },
+          ...(selectedServices.length > 0 ? [{ label: t('appointment.selectedServices') || 'Selected Services', value: selectedServices }] : []),
+          ...(doctorName ? [{ label: t('appointment.doctor'), value: doctorName }] : []),
+        ] : []}
+      />
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
           <FormField
@@ -245,7 +278,7 @@ const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: Bo
             className="w-full bg-dental-blue text-black hover:bg-dental-blue-dark"
             disabled={isSubmitting}
           >
-            {isSubmitting ? "Booking..." : "Book Appointment"}
+            {isSubmitting ? t('appointment.booking') || "Booking..." : t('appointment.book') || "Book Appointment"}
           </Button>
         </form>
       </Form>

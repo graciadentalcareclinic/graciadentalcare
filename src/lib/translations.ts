@@ -1,10 +1,13 @@
-
-
+// ...existing code...
   // Services Section (cards and features)
 
 export type SupportedLanguage = 'en' | 'id';
 
 export const translations: Record<string, Record<SupportedLanguage, string>> = {
+  // Validation Modal
+  'validationModal.heading': { en: 'Please Confirm Your Information', id: 'Mohon Konfirmasi Informasi Anda' },
+  'validationModal.continue': { en: 'Continue', id: 'Lanjutkan' },
+  'validationModal.goBack': { en: 'Go Back', id: 'Kembali' },
   'testimonials.heading': { en: 'What Our Patients Say', id: 'Apa Kata Pasien Kami' },
   // Promo Page
   'promo.heading': { en: 'Promos', id: 'Promo' },
@@ -97,7 +100,16 @@ export const translations: Record<string, Record<SupportedLanguage, string>> = {
   // Book Appointment
 
   'appointment.heading': { en: 'Book Your Appointment', id: 'Buat Janji Anda' },
-  'appointment.name': { en: 'Name', id: 'Nama' }
+  'appointment.name': { en: 'Name', id: 'Nama' },
+  'appointment.phone': { en: 'Phone Number', id: 'Nomor Telepon' },
+  'appointment.date': { en: 'Date', id: 'Tanggal' },
+  'appointment.time': { en: 'Time', id: 'Waktu' },
+  'appointment.reason': { en: 'Reason for Visit', id: 'Alasan Kunjungan' },
+  'appointment.selectedServices': { en: 'Selected Services', id: 'Layanan yang Dipilih' },
+  'appointment.doctor': { en: 'Doctor', id: 'Dokter' },
+  'appointment.book': { en: 'Book Appointment', id: 'Buat Janji' },
+  'appointment.booking': { en: 'Booking...', id: 'Memproses...' },
+  'validationModal.error': { en: 'There was an error booking your appointment. Please try again.', id: 'Terjadi kesalahan saat memesan janji. Silakan coba lagi.' },
 };
 
 
