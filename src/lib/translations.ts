@@ -1,9 +1,11 @@
 
+
   // Services Section (cards and features)
 
 export type SupportedLanguage = 'en' | 'id';
 
 export const translations: Record<string, Record<SupportedLanguage, string>> = {
+  'testimonials.heading': { en: 'What Our Patients Say', id: 'Apa Kata Pasien Kami' },
   // Promo Page
   'promo.heading': { en: 'Promos', id: 'Promo' },
   'promo.selectedHeading': { en: 'Selected Promos', id: 'Promo Terpilih' },
@@ -56,7 +58,12 @@ export const translations: Record<string, Record<SupportedLanguage, string>> = {
 
   // Services Section
   'services.heading': { en: 'Our Services', id: 'Layanan Kami' },
-  'services.description': { en: 'We offer a wide range of dental services to meet your needs.', id: 'Kami menawarkan berbagai layanan gigi untuk memenuhi kebutuhan Anda.' },
+  'services.subheading': { en: 'Dental Services for Every Need', id: 'Layanan Gigi untuk Setiap Kebutuhan' },
+  'services.subheadingIntro': { en: 'Dental Services for Every Need', id: 'Layanan Gigi untuk Setiap Kebutuhan' },
+  'services.subheadingDesc': {
+    en: 'From preventive care to advanced cosmetic and restorative treatments, we provide a full range of dental services tailored to your needs.',
+    id: 'Dari perawatan pencegahan hingga perawatan kosmetik dan restoratif tingkat lanjut, kami menyediakan berbagai layanan gigi yang disesuaikan dengan kebutuhan Anda.'
+  },
 
   // Doctors Section
   'doctors.heading': { en: 'Meet Our Doctors', id: 'Temui Dokter Kami' },

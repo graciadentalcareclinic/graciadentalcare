@@ -62,16 +62,13 @@ const ServicesSection = () => {
   return (
     <section id="services" className="py-20 bg-dental-blue-light lg:pt-40">
       <div className="container-padding mx-auto">
-        <div className="text-center mb-6">
-          <span className="text-sm font-medium uppercase tracking-wider text-gray-500">{t('services.heading')}</span>
-        </div>
-        <SectionHeading>{t('services.subheading')}</SectionHeading>
-
+        {/* Removed the small black text above the subheading as requested */}
+        <SectionHeading>{t('services.heading')}</SectionHeading>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
           <div className="flex flex-col items-center lg:items-start w-full">
             <div className="w-16 h-1 bg-gradient-to-r from-sky-400 to-sky-700 rounded-full mb-2"></div>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 italic font-medium text-center lg:text-left">
-              {t('services.intro1')} <span className="text-sky-700 font-semibold">{t('services.intro2')}</span> {t('services.intro3')} <span className="text-sky-700 font-semibold">{t('services.intro4')}</span> {t('services.intro5')} <span className="text-sky-700 font-semibold">{t('services.intro6')}</span>,<br className="hidden sm:block" /> {t('services.intro7')}
+            <p className="mt-3 text-lg sm:text-xl md:text-2xl text-gray-700 text-center lg:text-left max-w-2xl mx-auto">
+              {t('services.subheadingDesc')}
             </p>
           </div>
         </div>
