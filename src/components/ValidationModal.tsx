@@ -13,10 +13,12 @@ interface ValidationModalProps {
 const ValidationModal: React.FC<ValidationModalProps> = ({ open, onContinue, onGoBack, formData, fields }) => {
   const { t } = useTranslation();
   if (!open) return null;
+  // Use promo-specific heading if present in fields
+  const promoHeading = fields.some(f => f.label === t('promo.hearAbout')) ? t('promo.validation.heading') : t('validationModal.heading');
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center" style={{ backdropFilter: 'blur(6px)', background: 'rgba(0,0,0,0.3)' }}>
       <div className="bg-white rounded-lg shadow-lg max-w-lg w-full p-8 relative animate-fade-in">
-        <h2 className="text-2xl font-bold mb-4 text-center text-sky-800">{t('validationModal.heading')}</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center text-sky-800">{promoHeading}</h2>
         <div className="mb-6 space-y-2">
           {fields.map((field, idx) => (
             <div key={idx} className="flex flex-col sm:flex-row sm:items-center gap-1">

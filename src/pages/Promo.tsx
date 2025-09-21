@@ -23,11 +23,11 @@ const Promo: React.FC = () => {
 
   const handleAdd = (promo: string) => {
     if (!selected.includes(promo)) {
-      setSelected(prev => [...prev, promo]);
+      setSelected(prev => Array.from(new Set([...prev, promo])));
     }
   };
   const handleRemove = (promo: string) => {
-    setSelected(selected.filter(p => p !== promo));
+  setSelected(prev => prev.filter(p => p !== promo));
   };
 
   return (
@@ -55,20 +55,24 @@ const Promo: React.FC = () => {
             ))}
           </div>
         </div>
-        <div className="mb-8" id="selected-promos">
-          <h2 className="text-xl font-semibold mb-2">{t('promo.selectedHeading')}</h2>
-          {selected.length === 0 ? (
-            <p className="text-gray-500">{t('promo.noneSelected')}</p>
-          ) : (
+        {selected.length > 0 && (
+          <div className="mb-8" id="selected-promos">
+            <h2 className="text-xl font-semibold mb-2">{t('promo.selectedHeading')}</h2>
             <ul className="list-disc ml-6">
-              {selected.map((promoKey, idx) => (
-                <li key={idx}>{t(promoKey)}</li>
+              {[...new Set(selected)].map((promoKey, idx) => (
+                <li
+                  key={idx}
+                  className="bg-sky-100 text-sky-800 font-semibold rounded px-2 py-1 my-1 transition-colors duration-200 border-2 border-sky-300 shadow"
+                  style={{ boxShadow: '0 0 0 2px #38bdf8' }}
+                >
+                  {t(promoKey)}
+                </li>
               ))}
             </ul>
-          )}
-        </div>
+          </div>
+        )}
         <div className="mt-12 mb-6">
-          <BookAppointmentForm doctorId={0} doctorName="" selectedServices={selected.map(k => t(k))} />
+          <BookAppointmentForm doctorId={0} doctorName="" selectedServices={selected} />
         </div>
       </div>
       <FloatingMenu

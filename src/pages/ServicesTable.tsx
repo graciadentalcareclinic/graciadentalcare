@@ -58,6 +58,8 @@ const SERVICES = [
 
 const ServicesTable: React.FC = () => {
   const [selected, setSelected] = useState<string[]>([]);
+  // Always deduplicate before passing to children or rendering
+  const uniqueSelected = Array.from(new Set(selected));
   const [category, setCategory] = useState<string>('All');
   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
 
@@ -68,7 +70,7 @@ const ServicesTable: React.FC = () => {
           const el = document.getElementById('selected-services');
           if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
         }, 100);
-        return [...prev, service];
+        return Array.from(new Set([...prev, service]));
       });
     }
   };
@@ -161,20 +163,9 @@ const ServicesTable: React.FC = () => {
             </div>
           ))}
         </div>
-        <div className="mb-8" id="selected-services">
-          <h2 className="text-xl font-semibold mb-2">Selected Services</h2>
-          {selected.length === 0 ? (
-            <p className="text-gray-500">No services selected yet.</p>
-          ) : (
-            <ul className="list-disc ml-6">
-              {selected.map((svc, idx) => (
-                <li key={idx}>{svc}</li>
-              ))}
-            </ul>
-          )}
-        </div>
+        {/* Removed non-highlighted Selected Services list. Only the highlighted list in BookAppointmentForm will be shown. */}
         <div className="mt-12 mb-6">
-          <BookAppointmentForm doctorId={0} doctorName="" selectedServices={selected} />
+          <BookAppointmentForm doctorId={0} doctorName="" selectedServices={uniqueSelected} />
         </div>
       </div>
       <FloatingMenu
