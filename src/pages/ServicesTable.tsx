@@ -85,7 +85,7 @@ const ServicesTable: React.FC = () => {
     <div className="min-h-screen">
       <Navbar />
       <div className="container-padding mx-auto py-12">
-      <h1 className="text-3xl font-bold mb-6">Dental Services</h1>
+  <h1 className="text-2xl md:text-3xl font-bold mb-6 mt-4 md:mt-0">Dental Services</h1>
       <div className="mb-8">
         {/* Table for desktop, cards for mobile */}
         <div className="hidden sm:block">
