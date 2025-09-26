@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -40,11 +39,12 @@ const Navbar = () => {
             style={{ minWidth: 32 }}
           />
           <span
-            className="font-bold text-base md:text-xl lg:text-2xl tracking-tight whitespace-nowrap cursor-pointer"
+            className="font-bold text-base md:text-xl lg:text-2xl tracking-tight whitespace-nowrap cursor-pointer relative overflow-hidden shine-mobile"
             style={{ letterSpacing: '-0.01em' }}
             tabIndex={0}
           >
             Gracia Dental Care
+            <span className="absolute inset-0 pointer-events-none hidden sm:block"></span>
           </span>
         </div>
 
