@@ -5,6 +5,22 @@ import BookAppointmentForm from '@/components/BookAppointmentForm';
 import { Button } from '@/components/ui/button';
 
 const SERVICES = [
+	// Implant category and subcategories
+	{
+		category: 'Implant',
+		name: 'Biofuse',
+		description: 'Biotechnology modern, premium USA technology, osseointegration stable and affordable.'
+	},
+	{
+		category: 'Implant',
+		name: 'Smartfix',
+		description: 'Smart implant solution, optimal osseintegration, and premium technology from USA.'
+	},
+	{
+		category: 'Implant',
+		name: 'Nanograft',
+		description: 'Pioneer in implant with nanotechnology, stable and reliable. Product from Swiss (Straumann).'
+	},
 	{
 		category: 'First Appointment',
 		name: 'Checkup/Diagnosis',
