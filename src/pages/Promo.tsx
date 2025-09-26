@@ -96,7 +96,7 @@ const Promo: React.FC = () => {
   };
 
   return (
-    <div className="pt-24 pb-16">
+    <div className="pt-32 pb-16">
       <div className="container-padding mx-auto">
         <Link
           to="/"

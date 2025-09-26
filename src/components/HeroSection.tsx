@@ -20,11 +20,11 @@ const HeroSection = () => {
   });
 
   return (
-    <section className="pt-16 pb-10 sm:pt-24 sm:pb-16">
+    <section className="pt-16 pb-10 sm:pt-20 sm:pb-16">
       <div className="container-padding mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
         <div className="flex flex-col justify-center">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
-            Your Perfect Smile Starts with Gracia Dental Care
+          <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold leading-tight text-sky-700 drop-shadow-md mb-2">
+            Your Perfect Smile Starts with <span className="text-blue-500">Gracia Dental Care</span>
           </h1>
           <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600">
             Advanced dental care with a gentle touch. Book your appointment today.
