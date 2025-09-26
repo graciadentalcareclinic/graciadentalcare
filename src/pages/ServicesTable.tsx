@@ -319,7 +319,7 @@ const ServicesTable: React.FC = () => {
 						</ul>
 					)}
 				</div>
-				<div className="mt-12 mb-2 sm:mb-0">
+				<div className="mt-12 mb-0.5 sm:mb-0">
 					<BookAppointmentForm doctorId={0} doctorName="" selectedServices={selected} />
 				</div>
 			</div>
