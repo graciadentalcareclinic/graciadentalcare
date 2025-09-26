@@ -35,23 +35,23 @@ export const LanguageToggle: React.FC<LanguageToggleProps> = ({
     </div>
   ) : (
     <div className="w-full flex justify-center md:hidden">
-      <div className="flex items-center gap-4 max-w-[300px]">
-        <Button
-          variant={currentLanguage === 'en' ? 'default' : 'outline'}
-          size="lg"
+      <div className="flex items-center gap-1 text-[10px] font-medium text-gray-700">
+        <span className="mr-1">Language</span>
+        <button
+          className={`px-1.5 py-0.5 rounded ${currentLanguage === 'en' ? 'bg-sky-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-sky-100'}`}
+          style={{ fontSize: '0.7em', minWidth: 22, minHeight: 18, lineHeight: '1' }}
           onClick={() => onLanguageChange('en')}
-          className="flex-1"
         >
-          English
-        </Button>
-        <Button
-          variant={currentLanguage === 'id' ? 'default' : 'outline'}
-          size="lg"
+          EN
+        </button>
+        <span className="mx-0.5">|</span>
+        <button
+          className={`px-1.5 py-0.5 rounded ${currentLanguage === 'id' ? 'bg-sky-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-sky-100'}`}
+          style={{ fontSize: '0.7em', minWidth: 22, minHeight: 18, lineHeight: '1' }}
           onClick={() => onLanguageChange('id')}
-          className="flex-1"
         >
-          Bahasa
-        </Button>
+          ID
+        </button>
       </div>
     </div>
   );
