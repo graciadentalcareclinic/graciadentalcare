@@ -1,273 +1,5 @@
-
-
-const formSchema = z.object({
-	name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
-	phone: z.string().min(10, { message: 'Please enter a valid phone number' }),
-	dateOfBirth: z.date({ required_error: 'Please enter your date of birth' }),
-	date: z.date({ required_error: 'Please select a date' }),
-	time: z.string().min(1, { message: 'Please select a time' }),
-	reason: z.string().min(10, { message: 'Please provide a reason for your visit' }),
-	hearAbout: z.string().optional(),
-});
-
-type FormValues = z.infer<typeof formSchema>;
-
-const BookAppointmentForm: React.FC = () => {
-	const { toast } = useToast();
-	const [isSubmitting, setIsSubmitting] = useState(false);
-	const form = useForm<FormValues>({
-		resolver: zodResolver(formSchema),
-		defaultValues: {
-			name: '',
-			phone: '',
-			dateOfBirth: undefined,
-			date: undefined,
-			time: '',
-			reason: '',
-			hearAbout: '',
-		}
-	});
-
-	const sendToWhatsApp = (data: FormValues) => {
-		const timeZone = 'Asia/Jakarta';
-		const zonedDate = toZonedTime(data.date, timeZone);
-		const formattedDate = tzFormat(zonedDate, 'PPP', { timeZone });
-		let dobString = '';
-		if (data.dateOfBirth) {
-			dobString = tzFormat(toZonedTime(data.dateOfBirth, timeZone), 'dd/MM/yyyy', { timeZone });
-		}
-		let message = `*New Appointment Request*\n\n` +
-			`*Name:* ${data.name}\n` +
-			`*Phone Number:* ${data.phone}\n` +
-			`*Date of Birth:* ${dobString}\n` +
-			`*Date:* ${formattedDate} (Asia/Jakarta)\n` +
-			`*Time:* ${data.time}\n` +
-			`*Reason:* ${data.reason}`;
-		if (data.hearAbout) {
-			message += `\n*How did you hear about us?:* ${data.hearAbout}`;
-		}
-		const encodedMessage = encodeURIComponent(message);
-		const whatsappUrl = `https://wa.me/6285210121788?text=${encodedMessage}`;
-		window.open(whatsappUrl, '_blank');
-	};
-
-	const onSubmit = async (data: FormValues) => {
-		setIsSubmitting(true);
-		try {
-			sendToWhatsApp(data);
-			form.reset();
-		} finally {
-			setIsSubmitting(false);
-		}
-	};
-
-	// Helper for 30-min interval times
-	const times: string[] = [];
-	for (let h = 0; h < 24; h++) {
-		for (let m = 0; m < 60; m += 30) {
-			const hour12 = h % 12 === 0 ? 12 : h % 12;
-			const ampm = h < 12 ? 'AM' : 'PM';
-			times.push(`${hour12}:${m.toString().padStart(2, '0')} ${ampm}`);
-		}
-	}
-
-	return (
-		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
-				<FormField
-					control={form.control}
-					name="name"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Name</FormLabel>
-							<FormControl>
-								<Input placeholder="John Doe" {...field} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name="phone"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Phone</FormLabel>
-							<FormControl>
-								<Input placeholder="(123) 456-7890" {...field} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name="dateOfBirth"
-					render={({ field }) => (
-						<FormItem className="flex flex-col">
-							<FormLabel>Date of Birth</FormLabel>
-							<Popover>
-								<PopoverTrigger asChild>
-									<FormControl>
-										<div className="relative w-full">
-											<input
-												type="text"
-												readOnly
-												value={field.value ? format(field.value, "dd/MM/yyyy") : ''}
-												placeholder="DD/MM/YYYY"
-												className="w-full h-12 px-3 pr-10 border rounded-md bg-white text-base font-normal text-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-400 cursor-pointer transition-none hover:bg-white hover:border-sky-400"
-												style={{ cursor: 'pointer', transition: 'none' }}
-												tabIndex={0}
-												aria-label="Date of Birth"
-											/>
-											<span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-												<Calendar className="h-5 w-5 opacity-50" />
-											</span>
-										</div>
-									</FormControl>
-								</PopoverTrigger>
-								<PopoverContent className="w-auto p-0" align="start">
-									<CalendarComponent
-										mode="single"
-										selected={field.value}
-										onSelect={field.onChange}
-										disabled={(date) => {
-											const today = new Date();
-											today.setHours(0, 0, 0, 0);
-											return date >= today;
-										}}
-										initialFocus
-									/>
-								</PopoverContent>
-							</Popover>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-						<FormField
-							control={form.control}
-							name="date"
-							render={({ field }) => (
-								<FormItem className="flex flex-col">
-									<FormLabel>Appointment Date</FormLabel>
-							<Popover>
-								<PopoverTrigger asChild>
-									<FormControl>
-										<div className="relative w-full">
-											<input
-												type="text"
-												readOnly
-												value={field.value ? format(field.value, "PPP") : ''}
-												placeholder="Pick a date"
-												className="w-full h-12 px-3 pr-10 border rounded-md bg-white text-base font-normal text-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-400 cursor-pointer transition-none hover:bg-white hover:border-sky-400"
-												style={{ cursor: 'pointer', transition: 'none' }}
-												tabIndex={0}
-												aria-label="Pick a date"
-											/>
-											<span className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none">
-												<Calendar className="h-5 w-5 opacity-50" />
-											</span>
-										</div>
-									</FormControl>
-								</PopoverTrigger>
-								<PopoverContent className="w-auto p-0" align="start">
-									<CalendarComponent
-										mode="single"
-										selected={field.value}
-										onSelect={field.onChange}
-										disabled={(date) => {
-											const today = new Date();
-											today.setHours(0, 0, 0, 0);
-											return date < today;
-										}}
-										initialFocus
-									/>
-								</PopoverContent>
-							</Popover>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name="time"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Time</FormLabel>
-							<FormControl>
-								<select
-									className="w-full h-12 px-3 border rounded-md bg-white text-base text-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-400"
-									value={field.value}
-									onChange={e => field.onChange(e.target.value)}
-								>
-									<option value="">Select a time</option>
-									{times.map(time => (
-										<option key={time} value={time}>{time}</option>
-									))}
-								</select>
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<FormField
-					control={form.control}
-					name="hearAbout"
-					render={({ field }) => {
-						const options = [
-							{ value: '', label: '--' },
-							{ value: 'website', label: 'Website' },
-							{ value: 'social', label: 'Social Media' },
-							{ value: 'word', label: 'Word of Mouth' },
-							{ value: 'visit', label: 'Previous Visit' },
-							{ value: 'other', label: 'Other' },
-						];
-						return (
-							<FormItem>
-								<FormLabel>How did you hear about us?</FormLabel>
-								<FormControl>
-									<select
-										className="w-full h-12 px-3 border rounded-md bg-white text-base text-sky-800 focus:outline-none focus:ring-2 focus:ring-sky-400"
-										value={field.value}
-										onChange={e => field.onChange(e.target.value)}
-									>
-										{options.map(opt => (
-											<option key={opt.value} value={opt.value}>{opt.label}</option>
-										))}
-									</select>
-								</FormControl>
-								<FormMessage />
-							</FormItem>
-						);
-					}}
-				/>
-				<FormField
-					control={form.control}
-					name="reason"
-					render={({ field }) => (
-						<FormItem>
-							<FormLabel>Reason for Visit</FormLabel>
-							<FormControl>
-								<Input placeholder="Describe your reason for visiting" {...field} />
-							</FormControl>
-							<FormMessage />
-						</FormItem>
-					)}
-				/>
-				<Button type="submit" className="w-full bg-dental-blue text-black hover:bg-dental-blue-dark" disabled={isSubmitting}>
-					{isSubmitting ? 'Booking...' : 'Book Appointment'}
-				</Button>
-			</form>
-		</Form>
-	);
-};
-
-export default BookAppointmentForm;
-
 import React, { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { z } from 'zod';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useToast } from "@/hooks/use-toast";
 import { format } from 'date-fns';
 import { Calendar } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -275,9 +7,229 @@ import { Input } from '@/components/ui/input';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Calendar as CalendarComponent } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useToast } from '@/hooks/use-toast';
-import { toZonedTime, format as tzFormat } from 'date-fns-tz';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod';
+
+interface BookAppointmentFormProps {
+  doctorId: number;
+  doctorName: string;
+  selectedServices?: string[];
+}
+
+const formSchema = z.object({
+  name: z.string().min(2, { message: 'Name must be at least 2 characters' }),
+  phone: z.string().min(10, { message: 'Please enter a valid phone number' }),
+  date: z.date({ required_error: 'Please select a date' }),
+  time: z.string().min(1, { message: 'Please select a time' }),
+  reason: z.string().min(10, { message: 'Please provide a reason for your visit' }),
+});
+
+type FormValues = z.infer<typeof formSchema>;
+
+const availableTimes = [
+  '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM',
+  '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM'
+];
+
+// Import doctors data to get availability
+const doctors = [
+  {
+    id: 1,
+    name: "Charly Esmond Siagian",
+    availableDays: [1, 3, 5] // Monday, Wednesday, Friday
+  },
+  {
+    id: 2,
+    name: "Desyanne Winardi",
+    availableDays: [1, 2, 3, 4, 5] // Monday to Friday
+  },
+  {
+    id: 3,
+    name: "Bradley Melthon Siagian",
+    availableDays: [1, 2, 3, 4, 5] // Monday to Friday
+  },
+  {
+    id: 4,
+    name: "Erwina Siagian",
+    availableDays: [1, 2, 3, 4, 5] // Monday to Friday
+  },
+];
+
+const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: BookAppointmentFormProps) => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  
+  const form = useForm<FormValues>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      name: '',
+      phone: '',
+      time: '',
+      reason: '',
+    }
+  });
 
 
+  const sendToWhatsApp = (data: FormValues) => {
+    const formattedDate = format(data.date, 'PPP');
+    let message = `New Appointment Request:%0AName: ${data.name}%0APhone: ${data.phone}%0ADate: ${formattedDate}%0ATime: ${data.time}%0ADoctor: ${doctorName}%0AReason: ${data.reason}`;
+    if (Array.isArray(selectedServices) && selectedServices.length > 0) {
+      message += `%0ASelected Services:%0A- ${selectedServices.join('%0A- ')}`;
+    }
+    const whatsappUrl = `https://wa.me/6289637507810?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
+  const onSubmit = async (data: FormValues) => {
+    setIsSubmitting(true);
+    try {
+      sendToWhatsApp(data);
+      form.reset();
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was an error booking your appointment. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
+  const getDoctorAvailability = () => {
+    const doctor = doctors.find(doc => doc.id === doctorId);
+    return doctor?.availableDays || [];
+  };
+
+  return (
+    <div className="mt-6">
+      <Form {...form}>
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Full Name</FormLabel>
+                <FormControl>
+                  <Input placeholder="John Doe" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+        
+          
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Phone Number</FormLabel>
+                <FormControl>
+                  <Input placeholder="(123) 456-7890" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="date"
+            render={({ field }) => (
+              <FormItem className="flex flex-col">
+                <FormLabel>Date</FormLabel>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={`w-full pl-3 text-left font-normal ${!field.value ? "text-muted-foreground" : ""}`}
+                      >
+                        {field.value ? (
+                          format(field.value, "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                        <Calendar className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <CalendarComponent
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) => {
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        if (date < today) return true;
+                        
+                        const dayOfWeek = date.getDay();
+                        const availableDays = getDoctorAvailability();
+                        return !availableDays.includes(dayOfWeek);
+                      }}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="time"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Time</FormLabel>
+                <FormControl>
+                  <select
+                    className="w-full p-2 border rounded-md"
+                    {...field}
+                  >
+                    <option value="">Select a time</option>
+                    {availableTimes.map((time) => (
+                      <option key={time} value={time}>
+                        {time}
+                      </option>
+                    ))}
+                  </select>
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <FormField
+            control={form.control}
+            name="reason"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Reason for Visit</FormLabel>
+                <FormControl>
+                  <Input placeholder="Please describe your dental concerns..." {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          
+          <Button 
+            type="submit" 
+            className="w-full bg-dental-blue text-black hover:bg-dental-blue-dark"
+            disabled={isSubmitting}
+          >
+            {isSubmitting ? "Booking..." : "Book Appointment"}
+          </Button>
+        </form>
+      </Form>
+    </div>
+  );
+};
+
+export default BookAppointmentForm;

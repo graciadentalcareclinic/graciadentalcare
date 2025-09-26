@@ -1,71 +1,80 @@
 
-import LanguageToggleFooter from './LanguageToggleFooter';
 
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-t from-sky-100 via-white to-white pt-16 pb-10 border-t border-sky-200">
-      <div className="container-padding mx-auto px-4">
-        <div className="flex flex-col md:flex-row md:justify-between md:items-start gap-10 md:gap-16">
-          {/* Brand & Socials */}
-          <div className="flex-1 flex flex-col items-center md:items-start gap-4">
-            <div className="flex items-center gap-3">
-              <img src="/logo.jpg" alt="Gracia Dental Care Logo" className="h-12 w-12 rounded-full border-2 border-sky-400 shadow-md object-cover" />
-              <span className="font-extrabold text-2xl text-sky-800 tracking-tight">Gracia Dental Care</span>
+    <footer id="contacts" className="bg-white pt-16 pb-8">
+      <div className="container-padding mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+          <div>
+            <div className="flex items-center mb-4">
+              <img
+                src="/logo.jpg"
+                alt="Gracia Dental Care Logo"
+                className="h-8 w-8 rounded-full object-cover mr-2 border-2 border-dental-blue"
+                style={{ minWidth: 32 }}
+              />
+              <span className="font-bold text-lg">Gracia Dental Care | Klinik Gigi Jakarta Barat</span>
             </div>
-            <p className="text-gray-600 text-center md:text-left text-base max-w-xs">Dentist & Dental Office<br /><span className="block font-semibold text-sky-700">Senyum Sempurnamu dimulai dari sini</span></p>
-            <div className="flex gap-4 mt-2">
-              <a href="https://www.instagram.com/graciadentalcare/" target="_blank" rel="noopener noreferrer" className="rounded-full bg-white border border-sky-200 p-2 hover:bg-pink-100 hover:border-pink-400 transition-colors shadow-sm" aria-label="Instagram">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="M7.75 2h8.5A5.75 5.75 0 0 1 22 7.75v8.5A5.75 5.75 0 0 1 16.25 22h-8.5A5.75 5.75 0 0 1 2 16.25v-8.5A5.75 5.75 0 0 1 7.75 2Zm0 1.5A4.25 4.25 0 0 0 3.5 7.75v8.5A4.25 4.25 0 0 0 7.75 20.5h8.5A4.25 4.25 0 0 0 20.5 16.25v-8.5A4.25 4.25 0 0 0 16.25 3.5h-8.5Zm4.25 3.25a5.25 5.25 0 1 1 0 10.5 5.25 5.25 0 0 1 0-10.5Zm0 1.5a3.75 3.75 0 1 0 0 7.5 3.75 3.75 0 0 0 0-7.5Zm5.25.75a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>
-              </a>
-              <a href="https://wa.me/6285210121788" target="_blank" rel="noopener noreferrer" className="rounded-full bg-white border border-sky-200 p-2 hover:bg-green-100 hover:border-green-400 transition-colors shadow-sm" aria-label="WhatsApp">
-                <svg width="24" height="24" fill="none" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.94 14.25L2 22l5.93-1.56A10 10 0 1 0 12 2Zm0 18a8 8 0 0 1-4.09-1.13l-.29-.17-3.51.92.94-3.43-.19-.3A8 8 0 1 1 20 12a8 8 0 0 1-8 8Zm4.43-5.34c-.24-.12-1.42-.7-1.64-.78-.22-.08-.38-.12-.54.12-.16.23-.62.78-.76.94-.14.16-.28.18-.51.07-.24-.12-.99-.36-1.89-1.13-.7-.62-1.18-1.38-1.32-1.61-.14-.23-.02-.36.1-.48.1-.1.23-.27.34-.4.11-.13.15-.22.23-.37.08-.15.04-.28-.02-.4-.06-.11-.57-1.23-.78-1.68-.21-.45-.42-.39-.58-.4-.15-.01-.32-.01-.49-.01-.17 0-.45.06-.68.3-.23.24-.87.85-.87 2.07 0 1.22.89 2.4 1.02 2.57.13.17 1.7 2.6 4.11 3.54.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.44-.59 1.65-1.16.2-.57.2-1.06.14-1.16-.06-.1-.22-.16-.46-.28Z"/></svg>
+            <p className="text-gray-600 mb-4">
+              Dentist & Dental Office<br />
+              <span className="block font-semibold">𝗦𝗲𝗻𝘆𝘂𝗺 𝗦𝗲𝗺𝗽𝘂𝗿𝗻𝗮𝗺𝘂 𝗱𝗶𝗺𝘂𝗹𝗮𝗶 𝗱𝗮𝗿𝗶 𝘀𝗶𝗻𝗶</span>
+            </p>
+            <div className="flex space-x-4">
+              <a href="https://www.instagram.com/graciadentalcare/" aria-label="Instagram" className="text-gray-600 hover:text-black">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2C14.717 2 15.056 2.01 16.122 2.06C17.187 2.11 17.912 2.277 18.55 2.525C19.21 2.779 19.766 3.123 20.322 3.678C20.8305 4.1779 21.224 4.78259 21.475 5.45C21.722 6.087 21.89 6.813 21.94 7.878C21.987 8.944 22 9.283 22 12C22 14.717 21.99 15.056 21.94 16.122C21.89 17.187 21.722 17.912 21.475 18.55C21.2247 19.2178 20.8311 19.8226 20.322 20.322C19.822 20.8303 19.2173 21.2238 18.55 21.475C17.913 21.722 17.187 21.89 16.122 21.94C15.056 21.987 14.717 22 12 22C9.283 22 8.944 21.99 7.878 21.94C6.813 21.89 6.088 21.722 5.45 21.475C4.78233 21.2245 4.17753 20.8309 3.678 20.322C3.16941 19.8222 2.77593 19.2175 2.525 18.55C2.277 17.913 2.11 17.187 2.06 16.122C2.013 15.056 2 14.717 2 12C2 9.283 2.01 8.944 2.06 7.878C2.11 6.812 2.277 6.088 2.525 5.45C2.77524 4.78218 3.1688 4.17732 3.678 3.678C4.17767 3.16923 4.78243 2.77573 5.45 2.525C6.088 2.277 6.812 2.11 7.878 2.06C8.944 2.013 9.283 2 12 2ZM12 7C10.6739 7 9.40215 7.52678 8.46447 8.46447C7.52678 9.40215 7 10.6739 7 12C7 13.3261 7.52678 14.5979 8.46447 15.5355C9.40215 16.4732 10.6739 17 12 17C13.3261 17 14.5979 16.4732 15.5355 15.5355C16.4732 14.5979 17 13.3261 17 12C17 10.6739 16.4732 9.40215 15.5355 8.46447C14.5979 7.52678 13.3261 7 12 7ZM18.5 6.75C18.5 6.41848 18.3683 6.10054 18.1339 5.86612C17.8995 5.6317 17.5815 5.5 17.25 5.5C16.9185 5.5 16.6005 5.6317 16.3661 5.86612C16.1317 6.10054 16 6.41848 16 6.75C16 7.08152 16.1317 7.39946 16.3661 7.63388C16.6005 7.8683 16.9185 8 17.25 8C17.5815 8 17.8995 7.8683 18.1339 7.63388C18.3683 7.39946 18.5 7.08152 18.5 6.75ZM12 9C12.7956 9 13.5587 9.31607 14.1213 9.87868C14.6839 10.4413 15 11.2044 15 12C15 12.7956 14.6839 13.5587 14.1213 14.1213C13.5587 14.6839 12.7956 15 12 15C11.2044 15 10.4413 14.6839 9.87868 14.1213C9.31607 13.5587 9 12.7956 9 12C9 11.2044 9.31607 10.4413 9.87868 9.87868C10.4413 9.31607 11.2044 9 12 9Z" fill="currentColor"/>
+                </svg>
               </a>
             </div>
           </div>
-          {/* Navigation */}
-          <div className="flex-1 flex flex-col gap-2 items-center md:items-start">
-            <h3 className="text-lg font-semibold text-sky-700 mb-2 tracking-wide">Navigation</h3>
-            <nav className="flex flex-col gap-1 text-base">
-              <a href="#" className="hover:text-sky-700 transition-colors">Home</a>
-              <a href="#about" className="hover:text-sky-700 transition-colors">About Us</a>
-              <a href="#services" className="hover:text-sky-700 transition-colors">Services</a>
-              <a href="#doctors" className="hover:text-sky-700 transition-colors">Doctors</a>
-              <a href="#testimonials" className="hover:text-sky-700 transition-colors">Testimonials</a>
-            </nav>
+          
+          <div>
+            <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-gray-600 hover:text-black">Home</a></li>
+              <li><a href="#about" className="text-gray-600 hover:text-black">About Us</a></li>
+              <li><a href="#services" className="text-gray-600 hover:text-black">Services</a></li>
+              <li><a href="#doctors" className="text-gray-600 hover:text-black">Doctors</a></li>
+              <li><a href="#testimonials" className="text-gray-600 hover:text-black">Testimonials</a></li>
+            </ul>
           </div>
-          {/* Contact & Map */}
-          <div className="flex-1 flex flex-col gap-2 items-center md:items-start">
-            <h3 className="text-lg font-semibold text-sky-700 mb-2 tracking-wide">Contact</h3>
-            <div className="text-gray-700 text-base">
-              <div className="mb-1"><strong>Phone:</strong> <a href="tel:+62215658561" className="text-sky-700 hover:underline">(021) 5658561</a></div>
-              <div className="mb-1"><strong>Email:</strong> <a href="mailto:info@graciadentalcare.com" className="text-sky-700 hover:underline">info@graciadentalcare.com</a></div>
-              <div className="mb-1"><strong>Address:</strong> Jl. Kavling Polri No.1606 Blok F8, Jelambar, Jakarta Barat</div>
-              <div className="mb-1"><strong>Jam Praktek:</strong> Senin, Selasa, Kamis : 10.00-21.00 | Rabu, Jumat : 10.00-17.00</div>
-            </div>
-            <div className="w-full mt-2 rounded-2xl overflow-hidden shadow-md border border-sky-100">
-              <iframe
-                title="Gracia Dental Care Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.669964073964!2d106.7829640758706!3d-6.176212160536019!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f6e2e2e2e2e3%3A0x7e7e7e7e7e7e7e7e!2sGracia%20Dental%20Care!5e0!3m2!1sen!2sid!4v1695370000000!5m2!1sen!2sid"
-                width="100%"
-                height="120"
-                className="border-0 w-full"
-                style={{ border: 0, borderRadius: '1rem' }}
-                allowFullScreen={true}
-                loading="lazy"
-                referrerPolicy="no-referrer-when-downgrade"
-              ></iframe>
-            </div>
+          
+          <div>
+            <h4 className="font-semibold text-lg mb-4">Services</h4>
+            <ul className="space-y-2">
+              <li><a href="#" className="text-gray-600 hover:text-black">General Dentistry</a></li>
+              <li><a href="#" className="text-gray-600 hover:text-black">Cosmetic Dentistry</a></li>
+              <li><a href="#" className="text-gray-600 hover:text-black">Dental Implants</a></li>
+              <li><a href="#" className="text-gray-600 hover:text-black">Orthodontics</a></li>
+              <li><a href="#" className="text-gray-600 hover:text-black">Pediatric Dentistry</a></li>
+            </ul>
+          </div>
+          
+          <div>
+            <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
+            <address className="not-italic">
+              <div className="mb-2 text-gray-600">
+                <strong>Address:</strong> Jl. Kavling Polri No.1606 Blok F8, RT.8/RW.2, Jelambar, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460
+              </div>
+              <div className="mb-2 text-gray-600">
+                <strong>Phone:</strong> <a href="tel:+62215658561" className="hover:text-black">(021) 5658561</a>
+              </div>
+              <div className="mb-2 text-gray-600">
+                <strong>Email:</strong> <a href="mailto:info@graciadentalcare.com" className="hover:text-black">info@graciadentalcare.com</a>
+              </div>
+              <div className="text-gray-600">
+                <strong>Jam Praktek:</strong><br />
+                Senin, Selasa, Kamis : 10.00-21.00<br />
+                Rabu, Jumat : 10.00-17.00
+              </div>
+            </address>
           </div>
         </div>
+        
         <hr className="my-8 border-gray-200" />
-        <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="block md:hidden mb-2">
-            <LanguageToggleFooter />
-          </div>
-          <div className="text-center md:text-left text-gray-700 text-sm md:text-base font-medium">
-            © {new Date().getFullYear()} Gracia Dental Care. All Rights Reserved.<br />
-            <span className="text-xs md:text-sm text-gray-500">Design by <a href="https://graciadentalcare.com" className="text-sky-700 hover:underline">graciadentalcare</a>. Website: <a href="https://graciadentalcare.com" className="text-sky-700 hover:underline">graciadentalcare.com</a></span>
-          </div>
+        
+        <div className="text-center text-gray-600">
+          <p>© {new Date().getFullYear()} Gracia Dental Care. All Rights Reserved. Design by <a href="https://graciadentalcare.com" className="text-black hover:underline">graciadentalcare</a>. Website: <a href="https://graciadentalcare.com" className="text-black hover:underline">graciadentalcare.com</a></p>
         </div>
       </div>
     </footer>

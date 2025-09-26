@@ -1,27 +1,25 @@
 import { Button } from '@/components/ui/button';
-import SectionHeading from './SectionHeading';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
-import { useTranslation } from '@/lib/TranslationProvider';
 
 const services = [
   {
-    titleKey: 'services.cosmetic.title',
+    title: "Cosmetic Dentistry",
     image: "https://images.unsplash.com/photo-1606811971618-4486d14f3f99?ixlib=rb-4.0.3&auto=format&fit=crop&w=1074&q=80",
-    altKey: 'services.cosmetic.alt',
-    featuresKeys: ['services.cosmetic.feature1', 'services.cosmetic.feature2', 'services.cosmetic.feature3']
+    alt: "Cosmetic Dentistry Treatment",
+    features: ["Teeth Whitening", "Veneers", "Smile Makeovers"]
   },
   {
-    titleKey: 'services.implants.title',
+    title: "Implants & Prosthetics",
     image: "https://images.unsplash.com/photo-1629909613654-28e377c37b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=1068&q=80",
-    altKey: 'services.implants.alt',
-    featuresKeys: ['services.implants.feature1', 'services.implants.feature2']
+    alt: "Dental Implants and Prosthetics",
+    features: ["Dental Implants", "Dentures"]
   },
   {
-    titleKey: 'services.restorative.title',
+    title: "Restorative Care",
     image: "https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80",
-    altKey: 'services.restorative.alt',
-    featuresKeys: ['services.restorative.feature1', 'services.restorative.feature2', 'services.restorative.feature3']
+    alt: "Restorative Dental Procedures",
+    features: ["Fillings", "Crowns & Bridges", "Root Canal Therapy"]
   }
 ];
 
@@ -31,46 +29,43 @@ const CheckIcon = () => (
   </svg>
 );
 
-const ServiceCard = ({ titleKey, image, altKey, featuresKeys }: { titleKey: string; image: string; altKey: string; featuresKeys: string[] }) => {
-  const { t } = useTranslation();
-  return (
-    <div className="card-with-shadow overflow-hidden rounded-lg bg-white">
-      <div className="relative h-48">
-        <img src={image} alt={t(altKey)} className="w-full h-full object-cover" />
-      </div>
-      <div className="p-6">
-        <h3 className="text-xl font-semibold mb-4">{t(titleKey)}</h3>
-        <ul className="space-y-2 mb-6">
-          {featuresKeys.map((key, idx) => (
-            <li key={idx} className="flex items-center text-gray-700">
-              <CheckIcon />
-              <span>{t(key)}</span>
-            </li>
-          ))}
-        </ul>
-        <Button className="btn-secondary w-full flex items-center justify-between">
-          <span>{t('services.exploreMore')}</span>
-          <ArrowRight size={16} />
-        </Button>
-      </div>
+const ServiceCard = ({ title, image, alt, features }: { title: string; image: string; alt: string; features: string[] }) => (
+  <div className="card-with-shadow overflow-hidden rounded-lg bg-white">
+    <div className="relative h-48">
+      <img src={image} alt={alt} className="w-full h-full object-cover" />
     </div>
-  );
-};
+    <div className="p-6">
+      <h3 className="text-xl font-semibold mb-4">{title}</h3>
+      <ul className="space-y-2 mb-6">
+        {features.map((item, idx) => (
+          <li key={idx} className="flex items-center text-gray-700">
+            <CheckIcon />
+            <span>{item}</span>
+          </li>
+        ))}
+      </ul>
+      <Button className="btn-secondary w-full flex items-center justify-between">
+        <span>Explore more</span>
+        <ArrowRight size={16} />
+      </Button>
+    </div>
+  </div>
+);
 
 const ServicesSection = () => {
-  const { t } = useTranslation();
   return (
-    <section id="services" className="py-20 bg-dental-blue-light lg:pt-40">
+    <section id="services" className="py-20 bg-dental-blue-light">
       <div className="container-padding mx-auto">
-        {/* Removed the small black text above the subheading as requested */}
-        <SectionHeading>{t('services.heading')}</SectionHeading>
+        <div className="text-center mb-6">
+          <span className="text-sm font-medium uppercase tracking-wider text-gray-500">Our Services</span>
+        </div>
+        <h2 className="section-title text-center">Dental Services for Every Need</h2>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
-          <div className="flex flex-col items-center lg:items-start w-full">
-            <div className="w-16 h-1 bg-gradient-to-r from-sky-400 to-sky-700 rounded-full mb-2"></div>
-            <p className="mt-3 text-lg sm:text-xl md:text-2xl text-gray-700 text-center lg:text-left max-w-2xl mx-auto">
-              {t('services.subheadingDesc')}
-            </p>
-          </div>
+          <p className="text-gray-600 text-center lg:text-left">
+            From preventive care to advanced cosmetic and restorative treatments, 
+            we provide a full range of dental services tailored to your needs.
+          </p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
@@ -82,7 +77,7 @@ const ServicesSection = () => {
         <div className="mt-12 text-center">
           <Link to="/services">
             <Button className="btn-primary">
-              {t('services.exploreAll')}
+              Explore All Services
             </Button>
           </Link>
         </div>

@@ -105,7 +105,7 @@ const DoctorDetails = () => {
         <div className="container-padding mx-auto py-12">
           <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-lg p-8">
             <div className="flex flex-col md:flex-row items-center gap-8">
-              <img src={doctor.image} alt={`Photo of Dr. ${doctor.name}, ${doctor.role}`} className="w-40 h-40 rounded-full object-cover border-4 border-dental-blue mb-4 md:mb-0" />
+              <img src={doctor.image} alt={doctor.name} className="w-40 h-40 rounded-full object-cover border-4 border-dental-blue mb-4 md:mb-0" />
               <div className="flex-1">
                 <h1 className="text-2xl font-bold mb-2">{doctor.name}</h1>
                 <h2 className="text-lg text-gray-600 mb-4">{doctor.role}</h2>

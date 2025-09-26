@@ -1,5 +1,4 @@
 import React from 'react';
-import BookAppointmentForm from '../components/BookAppointmentForm';
 
 const Contacts = () => {
   return (
@@ -34,7 +33,16 @@ const Contacts = () => {
         </div>
         <div>
           <h2 className="text-xl font-semibold mb-4">Book Your Appointment</h2>
-          <BookAppointmentForm doctorId={0} doctorName="" />
+          <p className="mb-4">
+            Ready to transform your smile? Contact us today to schedule your appointment.
+            Our friendly staff is here to help you with any questions you may have.
+          </p>
+          <button
+            className="bg-dental-blue text-white px-6 py-2 rounded-full hover:bg-blue-600 transition-colors"
+            onClick={() => window.location.href = 'tel:+62215658561'}
+          >
+            Call Now
+          </button>
         </div>
       </div>
     </div>

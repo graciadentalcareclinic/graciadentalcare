@@ -20,24 +20,20 @@ const HeroSection = () => {
   });
 
   return (
-  <section className="pt-16 pb-10 sm:pt-20 sm:pb-16 lg:pt-24">
-      <div className="container-padding mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center lg:items-stretch">
-        <div className="flex flex-col justify-center lg:justify-start lg:self-start">
-          <h1 className="leading-tight">
-            <span className="block text-lg sm:text-xl md:text-2xl lg:text-3xl font-medium text-gray-700 mb-1">Your Perfect Smile Starts with</span>
-            <span className="block text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-sky-700">Gracia Dental Care</span>
+    <section className="pt-16 pb-10 sm:pt-24 sm:pb-16">
+      <div className="container-padding mx-auto grid grid-cols-1 lg:grid-cols-2 gap-6 sm:gap-8 items-center">
+        <div className="flex flex-col justify-center">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold leading-tight">
+            Your Perfect Smile Starts with Gracia Dental Care
           </h1>
-          <div className="mt-3 sm:mt-4 flex flex-col items-start">
-            <div className="w-16 h-1 bg-gradient-to-r from-sky-400 to-sky-700 rounded-full mb-2"></div>
-            <p className="text-lg sm:text-xl md:text-2xl text-gray-700 italic font-medium fancy-hero-desc">
-              From <span className="text-sky-700 font-semibold">preventive care</span> to <span className="text-sky-700 font-semibold">advanced cosmetic</span> and <span className="text-sky-700 font-semibold">restorative treatments</span>,<br className="hidden sm:block" /> we provide a full range of dental services tailored to your needs.
-            </p>
-          </div>
+          <p className="mt-3 sm:mt-4 text-base sm:text-lg text-gray-600">
+            Advanced dental care with a gentle touch. Book your appointment today.
+          </p>
 
           <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4">
             <Link to="/contacts">
               <Button className="btn-primary flex items-center gap-2 text-base sm:text-lg p-4 sm:p-5">
-                Book Appointment
+                Book an Appointment
                 <ArrowRight size={18} />
               </Button>
             </Link>

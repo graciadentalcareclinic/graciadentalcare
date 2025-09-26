@@ -1,0 +1,262 @@
+Got it ✅ — you want the **exact same logic/behavior untouched**, but styled as **cards instead of table rows**, so it looks cleaner and modern. I’ll transform your table-based structure into **card-style service items**, while keeping **all items, inputs, and buttons intact**. The cart, checkout, and script remain identical in functionality.
+
+Here’s the **final full script with card-style design**:
+
+```html
+<!-- Bob Elektronik Responsive Card Pricing for WPBakery -->
+<style>
+.bobelek-wrap { max-width: 1100px; margin: 20px auto; font-family: Arial, sans-serif; color:#223142; }
+.bobelek-title { text-align:center; font-size:26px; color:#223142; margin-bottom:20px; border-bottom:3px solid #f0b634; display:inline-block; padding:8px 20px; font-weight:700; }
+
+.bobelek-section { margin-bottom:28px; }
+.bobelek-section h3 { background:#f0f0f0; padding:10px 15px; border-radius:10px; font-size:18px; font-weight:700; color:#223142; margin-bottom:15px; }
+
+.bobelek-grid { display:grid; grid-template-columns: repeat(auto-fill, minmax(280px,1fr)); gap:16px; }
+.bobelek-card { background:#fff; border-radius:14px; box-shadow:0 2px 10px rgba(34,49,66,0.08); padding:16px; display:flex; flex-direction:column; justify-content:space-between; transition:transform .2s; }
+.bobelek-card:hover { transform:translateY(-3px); }
+.bobelek-service { font-weight:600; font-size:16px; margin-bottom:8px; }
+.bobelek-price { font-size:15px; color:#d64439; font-weight:700; margin-bottom:10px; }
+.bobelek-inputs { display:flex; flex-direction:column; gap:8px; margin-bottom:10px; }
+.bobelek-inputs input[type="number"], 
+.bobelek-inputs input[type="text"] { width:100%; padding:8px; border-radius:8px; border:1px solid #ccc; font-size:14px; box-sizing:border-box; }
+.bobelek-addcart { background:#25D366; color:#fff; border:none; padding:10px 16px; border-radius:24px; cursor:pointer; font-weight:700; font-size:15px; box-shadow:0 2px 8px rgba(34,49,66,0.10); transition:filter .2s; }
+.bobelek-addcart:hover { filter:brightness(.92); }
+
+.bobelek-cartbox { margin-top:22px; padding:16px; border:1.5px dashed #25D366; background:#fafafa; color:#223142; border-radius:12px; box-shadow:0 2px 8px rgba(34,49,66,0.04); }
+.bobelek-cartitem { border-bottom:1px solid #eee; padding:10px 4px; display:flex; justify-content:space-between; gap:12px; align-items:center; }
+.bobelek-cartitem .meta { font-size:15px; }
+.bobelek-cartcontrols { margin-top:8px; display:flex; gap:8px; }
+.bobelek-btnsmall { padding:7px 12px; border-radius:7px; border:none; cursor:pointer; font-weight:600; font-size:14px; }
+.bobelek-btnremove { background:#d64439; color:#fff; }
+.bobelek-btnclear { background:#777; color:#fff; }
+.bobelek-btncheckout { background:#25D366; color:#fff; margin-left:auto; }
+.bobelek-muted { color:#666; font-size:13px; }
+
+.bobelek-bankinfo { margin-top:20px; text-align:center; font-size:16px; font-weight:bold; background:#f9f9f9; border:2px dashed #d64439; padding:15px; color:#223142; border-radius:10px; }
+.bobelek-bankinfo span { display:block; margin:5px 0; }
+.bobelek-bankinfo strong { color:#d64439; }
+.bobelek-notes { margin-top:10px; background:#fffbe6; border:2px solid #f0b634; border-radius:10px; padding:15px; font-size:15px; }
+.bobelek-notes ul { margin:8px 0 0 18px; padding:0; }
+.bobelek-notes li { margin-bottom:8px; }
+
+</style>
+
+<div class="bobelek-wrap">
+  <div class="bobelek-title">Bob Elektronik Pricing List</div>
+
+  <!-- Water Heater -->
+  <div class="bobelek-section">
+    <h3>Water Heater</h3>
+    <div class="bobelek-grid">
+      <div class="bobelek-card">
+        <div class="bobelek-service">Jasa Servis Water Heater</div>
+        <div class="bobelek-price">Rp 800.000</div>
+        <div class="bobelek-inputs">
+          <input type="number" min="1" value="1">
+          <input type="text" placeholder="Keluhan / Komentar">
+        </div>
+        <button class="bobelek-addcart">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Kompor Tanem / Listrik -->
+  <div class="bobelek-section">
+    <h3>Kompor Tanem / Listrik</h3>
+    <div class="bobelek-grid">
+      <div class="bobelek-card">
+        <div class="bobelek-service">Jasa Servis Kompor (termasuk Busi Pematik, Cleaning, Jalur Pipa Gas)</div>
+        <div class="bobelek-price">Rp 1.500.000</div>
+        <div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div>
+        <button class="bobelek-addcart">Add to Cart</button>
+      </div>
+      <div class="bobelek-card">
+        <div class="bobelek-service">Jasa Ganti Pematik</div>
+        <div class="bobelek-price">Rp 700.000/pematik</div>
+        <div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div>
+        <button class="bobelek-addcart">Add to Cart</button>
+      </div>
+      <div class="bobelek-card"><div class="bobelek-service">Servis Kompor Listrik (Perbaikan Modul)</div><div class="bobelek-price">Rp 1.500.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Servis Kompor Listrik (Sedang)</div><div class="bobelek-price">Rp 700.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Servis Kompor Listrik (Ringan)</div><div class="bobelek-price">Rp 400.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+    </div>
+  </div>
+
+  <!-- AC Services -->
+  <div class="bobelek-section">
+    <h3>AC Services</h3>
+    <div class="bobelek-grid">
+      <div class="bobelek-card"><div class="bobelek-service">Cuci AC</div><div class="bobelek-price">Rp 100.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">AC Inverter</div><div class="bobelek-price">Rp 150.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Cuci AC Kaset</div><div class="bobelek-price">Rp 450.000/unit</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Cuci AC PRV</div><div class="bobelek-price">Rp 450.000/unit</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Overhaul</div><div class="bobelek-price">Rp 500.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Tambah Freon</div><div class="bobelek-price">Rp 250.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Tambah Freon</div><div class="bobelek-price">Rp 400.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Tambah Freon</div><div class="bobelek-price">Rp 450.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Bongkar Pasang AC 0.5 – 1 PK</div><div class="bobelek-price">Rp 450.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Bongkar Pasang AC 1.5 – 2 PK</div><div class="bobelek-price">Rp 550.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Jasa Pasang AC 0.5 – 1 PK</div><div class="bobelek-price">Rp 250.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Jasa Pasang AC 1.5 – 2 PK</div><div class="bobelek-price">Rp 300.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Jasa Bongkar AC 0.5 – 1 PK</div><div class="bobelek-price">Rp 200.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Jasa Bongkar AC 1.5 – 2 PK</div><div class="bobelek-price">Rp 250.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Vakum Instalasi</div><div class="bobelek-price">Rp 150.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+    </div>
+  </div>
+
+  <!-- Material AC -->
+  <div class="bobelek-section">
+    <h3>Material AC</h3>
+    <div class="bobelek-grid">
+      <div class="bobelek-card"><div class="bobelek-service">Pipa AC 0.5 – 1 PK</div><div class="bobelek-price">Rp 130.000/mtr</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Pipa AC 1.5 – 2 PK</div><div class="bobelek-price">Rp 150.000/mtr</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Kabel Power 2x1.5</div><div class="bobelek-price">Rp 30.000/mtr</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Kabel Power 3x1.5</div><div class="bobelek-price">Rp 40.000/mtr</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Bracket Outdoor AC 0.5 – 1 PK</div><div class="bobelek-price">Rp 100.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Bracket Outdoor AC 1.5 – 2 PK</div><div class="bobelek-price">Rp 150.000</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-addcart">Add to Cart</button></div>
+      <div class="bobelek-card"><div class="bobelek-service">Selang Drain Flexible</div><div class="bobelek-price">Rp 20.000/mtr</div><div class="bobelek-inputs"><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"></div><button class="bobelek-add
+      <div class="bobelek-card">
+        <div class="bobelek-service">Selang Drain Flexible</div>
+        <div class="bobelek-price">Rp 20.000/mtr</div>
+        <div class="bobelek-inputs">
+          <input type="number" min="1" value="1">
+          <input type="text" placeholder="Keluhan / Komentar">
+        </div>
+        <button class="bobelek-addcart">Add to Cart</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Cart -->
+  <div id="bobelek-cartbox" class="bobelek-cartbox" style="display:none;">
+    <h3>Keranjang Pesanan <span id="bobelek-cartcount">(0 items)</span></h3>
+    <div id="bobelek-cartitems"></div>
+    <div class="bobelek-cartcontrols">
+      <div><strong>Total: </strong><span id="bobelek-carttotal">Rp 0</span></div>
+      <button id="bobelek-clearcart" class="bobelek-btnsmall bobelek-btnclear">Clear Cart</button>
+      <button id="bobelek-checkout" class="bobelek-btnsmall bobelek-btncheckout">Checkout</button>
+    </div>
+  </div>
+
+  <!-- Customer Form -->
+  <div id="bobelek-customerform" style="margin-top:20px; padding:16px; border:1px solid #ccc; border-radius:10px; background:#fff;">
+    <h3>Data Customer</h3>
+    <div style="display:flex; flex-direction:column; gap:10px;">
+      <input id="custName" type="text" placeholder="Nama Lengkap" style="padding:8px; border-radius:6px; border:1px solid #ccc;">
+      <input id="custAlamat" type="text" placeholder="Alamat" style="padding:8px; border-radius:6px; border:1px solid #ccc;">
+      <input id="custWa" type="text" placeholder="Nomor WhatsApp" style="padding:8px; border-radius:6px; border:1px solid #ccc;">
+    </div>
+  </div>
+
+  <!-- Bank Info -->
+  <div class="bobelek-bankinfo">
+    <span>💳 Transfer Pembayaran ke:</span>
+    <span><strong>Bank BCA</strong></span>
+    <span>No. Rekening: <strong>5315156669</strong></span>
+    <span>a/n Isfahani</span>
+  </div>
+
+  <!-- Notes -->
+  <div class="bobelek-notes">
+    <strong>Garansi:</strong>
+    <ul>
+      <li>Jasa servis kompor: 2 bulan</li>
+      <li>Jasa servis water heater: 1 bulan</li>
+      <li>Garansi hanya untuk pekerjaan yang sama (tidak termasuk material)</li>
+    </ul>
+  </div>
+</div>
+
+<!-- Script -->
+<script>
+(function(){
+function parsePrice(text){return parseInt((''+text).replace(/[^0-9]/g,''))||0;}
+function formatRupiah(num){return 'Rp '+num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+const cart=[];
+const addButtons=document.querySelectorAll('.bobelek-addcart');
+const cartBox=document.getElementById('bobelek-cartbox');
+const cartItemsEl=document.getElementById('bobelek-cartitems');
+const cartCountEl=document.getElementById('bobelek-cartcount');
+const cartTotalEl=document.getElementById('bobelek-carttotal');
+const clearCartBtn=document.getElementById('bobelek-clearcart');
+const checkoutBtn=document.getElementById('bobelek-checkout');
+
+addButtons.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const card=btn.closest('.bobelek-card');
+    if(!card)return;
+    const service=card.querySelector('.bobelek-service').textContent.trim();
+    const price=parsePrice(card.querySelector('.bobelek-price').textContent.trim());
+    const qty=parseInt(card.querySelector('input[type="number"]').value)||1;
+    const keluhan=card.querySelector('input[type="text"]').value||'';
+    cart.push({id:Date.now().toString(36)+Math.floor(Math.random()*1000),service,price,qty,keluhan,subtotal:price*qty});
+    updateUI();
+    btn.textContent='Added ✓';setTimeout(()=>btn.textContent='Add to Cart',900);
+  });
+});
+
+function updateUI(){
+  const total=cart.reduce((s,it)=>s+it.subtotal,0);
+  if(cart.length===0){
+    cartBox.style.display='none';
+    cartItemsEl.innerHTML='';
+    cartCountEl.textContent='(0 items)';
+    cartTotalEl.textContent=formatRupiah(0);
+    return;
+  }
+  cartBox.style.display='block';
+  cartCountEl.textContent='('+cart.length+' item'+(cart.length>1?'s':'')+')';
+  cartTotalEl.textContent=formatRupiah(total);
+  cartItemsEl.innerHTML='';
+  cart.forEach((it,idx)=>{
+    const row=document.createElement('div');
+    row.className='bobelek-cartitem';
+    const meta=document.createElement('div');
+    meta.className='meta';
+    meta.innerHTML='<strong>'+it.service+'</strong><div class="bobelek-muted">'+it.qty+' × '+formatRupiah(it.price)+(it.keluhan?' — "'+it.keluhan+'"':'')+'</div>';
+    const right=document.createElement('div');
+    right.style.display='flex';right.style.alignItems='center';right.style.gap='8px';
+    const sub=document.createElement('div');sub.style.fontWeight='700';sub.textContent=formatRupiah(it.subtotal);
+    const removeBtn=document.createElement('button');removeBtn.className='bobelek-btnsmall bobelek-btnremove';removeBtn.textContent='Remove';
+    removeBtn.addEventListener('click',()=>{cart.splice(idx,1);updateUI();});
+    right.appendChild(sub);right.appendChild(removeBtn);
+    row.appendChild(meta);row.appendChild(right);
+    cartItemsEl.appendChild(row);
+  });
+}
+
+clearCartBtn.addEventListener('click',()=>{if(!confirm('Clear cart?'))return;cart.length=0;updateUI();});
+const custName=document.getElementById('custName');
+const custAlamat=document.getElementById('custAlamat');
+const custWa=document.getElementById('custWa');
+
+checkoutBtn.addEventListener('click',()=>{
+  if(cart.length===0){alert('Cart kosong.');return;}
+  if(!custName.value.trim()||!custAlamat.value.trim()||!custWa.value.trim()){alert('Mohon lengkapi data customer.');return;}
+  let msg='🧾 INVOICE PEMESANAN%0A';
+  msg+='---------------------------------%0A';
+  msg+='Item                 Qty   Subtotal%0A';
+  msg+='---------------------------------%0A';
+  let keluhanList=[];
+  cart.forEach(it=>{
+    let itemLine=it.service.padEnd(22,' ').substring(0,22)+' '+String(it.qty).padEnd(3,' ')+' '+formatRupiah(it.subtotal);
+    msg+=itemLine+'%0A';
+    if(it.keluhan) keluhanList.push(it.keluhan);
+  });
+  msg+='---------------------------------%0A';
+  msg+='TOTAL: '+cartTotalEl.textContent+'%0A';
+  msg+='---------------------------------%0A%0A';
+  msg+='👤 Customer Info:%0A';
+  msg+='Nama: '+custName.value+'%0A';
+  msg+='WhatsApp: '+custWa.value+'%0A';
+  msg+='Alamat: '+custAlamat.value+'%0A';
+  if(keluhanList.length>0){msg+='Keluhan: '+keluhanList.join(', ')+'%0A';}
+  msg+='%0A💳 Transfer Pembayaran ke:%0ABank BCA%20%20%0ANo. Rekening: 5315156669%20%20%0Aa/n Isfahani%0A%0A✅ Mohon kirim bukti transfer untuk konfirmasi.';
+  const bobWa='6285715108388';
+  const waUrl='https://wa.me/'+bobWa+'?text='+msg;
+  window.open(waUrl,'_blank');
+});
+
+updateUI();
+})();
+</script>

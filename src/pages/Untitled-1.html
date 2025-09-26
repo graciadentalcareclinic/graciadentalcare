@@ -1,0 +1,212 @@
+<!-- ================= Bob Elektronik Pricing (Cards Layout + Cart Total) ================= -->
+<style>
+.bobelek-wrap { max-width: 1100px; margin: 20px auto; font-family: Arial, sans-serif; background:#fff; color:#223142; }
+.bobelek-title { text-align:center; font-size:24px; color:#223142; margin-bottom:15px; border-bottom:3px solid #f0b634; display:inline-block; padding:5px 15px; font-weight:700; }
+
+/* Filter bar */
+.bobelek-filters { text-align:center; margin: 20px 0; }
+.bobelek-filters button {
+  background:#f0f0f0; border:none; padding:8px 16px; margin:0 5px;
+  border-radius:8px; font-weight:600; cursor:pointer; transition:all .2s;
+}
+.bobelek-filters button.active, .bobelek-filters button:hover { background:#25D366; color:#fff; }
+
+.bobelek-cards { display:flex; flex-wrap:wrap; gap:16px; }
+.bobelek-card {
+  flex:1 1 calc(50% - 16px); background:#fff; border-radius:12px;
+  box-shadow:0 2px 8px rgba(34,49,66,0.07); padding:16px; display:flex; flex-direction:column; gap:12px;
+}
+.bobelek-card h4 { margin:0; font-size:16px; font-weight:700; color:#223142; }
+.bobelek-card .price { font-weight:600; color:#25D366; }
+.bobelek-card input[type="number"], .bobelek-card input[type="text"] {
+  width:100%; padding:8px; border-radius:6px; border:1px solid #ddd;
+}
+.bobelek-addcart { background:#25D366; color:#fff; border:none; padding:10px 18px; border-radius:24px; cursor:pointer; font-weight:700; font-size:15px; transition:filter .2s; }
+.bobelek-addcart:hover { filter:brightness(.93); }
+
+.bobelek-cart { margin-top:30px; padding:16px; border:1px solid #eee; border-radius:12px; box-shadow:0 2px 6px rgba(0,0,0,0.05); }
+.bobelek-cart h3 { margin:0 0 10px; }
+.bobelek-cart ul { list-style:none; padding:0; margin:0 0 10px; }
+.bobelek-cart li { margin-bottom:6px; }
+.bobelek-total { font-weight:700; margin:10px 0; font-size:16px; color:#223142; }
+
+.bobelek-checkout { background:#111827; color:#fff; border:none; padding:10px 20px; border-radius:24px; cursor:pointer; font-weight:600; transition:0.2s; }
+.bobelek-checkout:hover { background:#374151; }
+
+@media(max-width:768px){ .bobelek-card { flex:1 1 100%; } }
+</style>
+
+<div class="bobelek-wrap">
+  <div class="bobelek-title">Bob Elektronik Pricing List</div>
+
+  <!-- Category Filters -->
+  <div class="bobelek-filters">
+    <button class="filter-btn active" data-cat="all">All</button>
+    <button class="filter-btn" data-cat="water">Water Heater</button>
+    <button class="filter-btn" data-cat="kompor">Kompor</button>
+    <button class="filter-btn" data-cat="ac">AC</button>
+    <button class="filter-btn" data-cat="material">Material</button>
+  </div>
+
+  <!-- Cards -->
+  <div class="bobelek-cards">
+    <!-- Water Heater -->
+    <div class="bobelek-card" data-cat="water">
+      <h4>Jasa Servis Water Heater</h4>
+      <div class="price">Rp 800.000</div>
+      <small>Pembelian material harga ditentukan teknisi di lapangan.</small>
+      <input type="number" min="1" value="1">
+      <input type="text" placeholder="Keluhan / Komentar">
+      <button class="bobelek-addcart">Add to Cart</button>
+    </div>
+
+    <!-- Kompor -->
+    <div class="bobelek-card" data-cat="kompor"><h4>Jasa Servis Kompor Tanem/Listrik</h4><div class="price">Rp 1.500.000</div><small>Termasuk: Busi Pematik, Cleaning Kompor, Cleaning Jalur Pipa Gas</small><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <div class="bobelek-card" data-cat="kompor"><h4>Jasa Ganti Pematik</h4><div class="price">Rp 700.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <div class="bobelek-card" data-cat="kompor"><h4>Jasa Servis Kompor Listrik (Modul)</h4><div class="price">Rp 1.500.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <div class="bobelek-card" data-cat="kompor"><h4>Jasa Servis Kompor Listrik (Sedang)</h4><div class="price">Rp 700.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <div class="bobelek-card" data-cat="kompor"><h4>Jasa Servis Kompor Listrik (Ringan)</h4><div class="price">Rp 400.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+
+    <!-- AC (shortened example, keep all like before) -->
+    <div class="bobelek-card" data-cat="ac"><h4>Cuci AC</h4><div class="price">Rp 100.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <div class="bobelek-card" data-cat="ac"><h4>AC Inverter</h4><div class="price">Rp 150.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <div class="bobelek-card" data-cat="ac"><h4>Overhaul</h4><div class="price">Rp 500.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <!-- ... continue with all AC items and Material items as before ... -->
+
+    <!-- Material -->
+    <div class="bobelek-card" data-cat="material"><h4>Pipa AC 0.5–1 PK</h4><div class="price">Rp 130.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <div class="bobelek-card" data-cat="material"><h4>Kabel Power 2x1.5</h4><div class="price">Rp 30.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+    <div class="bobelek-card" data-cat="material"><h4>Selang Drain Flexible</h4><div class="price">Rp 20.000</div><input type="number" min="1" value="1"><input type="text" placeholder="Keluhan / Komentar"><button class="bobelek-addcart">Add to Cart</button></div>
+  </div>
+
+  <!-- Cart -->
+  <div class="bobelek-cart">
+    <h3>Keranjang</h3>
+    <ul id="cart-items"></ul>
+    <div class="bobelek-total">Total: Rp 0</div>
+    <button class="bobelek-checkout" id="checkout">Checkout via WhatsApp</button>
+  </div>
+</div>
+
+<script>
+/* === Category Filter === */
+const filterBtns=document.querySelectorAll('.filter-btn');
+const cards=document.querySelectorAll('.bobelek-card');
+filterBtns.forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    filterBtns.forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const cat=btn.dataset.cat;
+    cards.forEach(c=>{
+      c.style.display = (cat==='all'||c.dataset.cat===cat)?'flex':'none';
+    });
+  });
+});
+
+/* === Cart Logic === */
+let cart=[];
+const cartItems=document.getElementById('cart-items');
+const totalEl=document.querySelector('.bobelek-total');
+
+function parsePrice(str){
+  return parseInt(str.replace(/[^0-9]/g,''))||0;
+}
+function formatRupiah(num){
+  return 'Rp ' + num.toLocaleString('id-ID');
+}
+function renderCart(){
+  cartItems.innerHTML='';
+  let total=0;
+  cart.forEach((item,i)=>{
+    const li=document.createElement('li');
+    const subtotal=item.qty*item.priceNum;
+    li.textContent=`${item.qty}x ${item.name} (${item.comment||'-'}) - ${formatRupiah(subtotal)}`;
+    cartItems.appendChild(li);
+    total+=subtotal;
+  });
+  totalEl.textContent='Total: ' + formatRupiah(total);
+}
+
+document.querySelectorAll('.bobelek-addcart').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const card=btn.closest('.bobelek-card');
+    const name=card.querySelector('h4').textContent;
+    const priceText=card.querySelector('.price').textContent;
+    const priceNum=parsePrice(priceText);
+    const qty=parseInt(card.querySelector('input[type="number"]').value);
+    const comment=card.querySelector('input[type="text"]').value;
+    cart.push({name,priceText,priceNum,qty,comment});
+    renderCart();
+  });
+});
+
+/* === Checkout via WhatsApp === */
+document.getElementById('checkout').addEventListener('click',()=>{
+  if(cart.length===0){ alert('Keranjang masih kosong'); return; }
+  let message='Halo Bobelektronik, saya ingin pesan:%0A';
+  let total=0;
+  cart.forEach(item=>{
+    const subtotal=item.qty*item.priceNum;
+    total+=subtotal;
+    message+=`- ${item.qty}x ${item.name} (${item.comment||'-'}) - ${formatRupiah(subtotal)}%0A`;
+  });
+  message+=`%0ATotal: ${formatRupiah(total)}`;
+  const waLink=`https://wa.me/6285715108388?text=${message}`;
+  window.open(waLink,'_blank');
+});
+</script>
+
+
+<script>(function(){
+function parsePrice(text){return parseInt((''+text).replace(/[^0-9]/g,''))||0;}
+function formatRupiah(num){return 'Rp '+num.toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.');}
+const cart=[];
+const addButtons=document.querySelectorAll('.bobelek-addcart');
+const grandTotalCell=document.getElementById('bobelek-grandtotal');
+const cartBox=document.getElementById('bobelek-cartbox');
+const cartItemsEl=document.getElementById('bobelek-cartitems');
+const cartCountEl=document.getElementById('bobelek-cartcount');
+const cartTotalEl=document.getElementById('bobelek-carttotal');
+const clearCartBtn=document.getElementById('bobelek-clearcart');
+const checkoutBtn=document.getElementById('bobelek-checkout');
+addButtons.forEach(btn=>{btn.addEventListener('click',()=>{const tr=btn.closest('tr');if(!tr)return;const tds=tr.querySelectorAll('td');if(tds.length<2)return;const service=tds[0].textContent.trim();const price=parsePrice(tds[1].textContent.trim());const qty=parseInt(tr.querySelector('input[type="number"]').value)||1;const keluhan=tr.querySelector('input[type="text"]').value||'';cart.push({id:Date.now().toString(36)+Math.floor(Math.random()*1000),service,price,qty,keluhan,subtotal:price*qty});updateUI();btn.textContent='Added ✓';setTimeout(()=>btn.textContent='Add to Cart',900);});});
+function updateUI(){const total=cart.reduce((s,it)=>s+it.subtotal,0);grandTotalCell.textContent=formatRupiah(total);if(cart.length===0){cartBox.style.display='none';cartItemsEl.innerHTML='';cartCountEl.textContent='(0 items)';cartTotalEl.textContent=formatRupiah(0);return;}cartBox.style.display='block';cartCountEl.textContent='('+cart.length+' item'+(cart.length>1?'s':'')+')';cartTotalEl.textContent=formatRupiah(total);cartItemsEl.innerHTML='';cart.forEach((it,idx)=>{const row=document.createElement('div');row.className='bobelek-cartitem';const meta=document.createElement('div');meta.className='meta';meta.innerHTML='<strong>'+it.service+'</strong><div class="bobelek-muted">'+it.qty+' × '+formatRupiah(it.price)+(it.keluhan?' — "'+it.keluhan+'"':'')+'</div>';const right=document.createElement('div');right.style.display='flex';right.style.alignItems='center';right.style.gap='8px';const sub=document.createElement('div');sub.style.fontWeight='700';sub.textContent=formatRupiah(it.subtotal);const removeBtn=document.createElement('button');removeBtn.className='bobelek-btnsmall bobelek-btnremove';removeBtn.textContent='Remove';removeBtn.addEventListener('click',()=>{cart.splice(idx,1);updateUI();});right.appendChild(sub);right.appendChild(removeBtn);row.appendChild(meta);row.appendChild(right);cartItemsEl.appendChild(row);});}
+clearCartBtn.addEventListener('click',()=>{if(!confirm('Clear cart?'))return;cart.length=0;updateUI();});
+const customerForm = document.getElementById('bobelek-customerform');
+const custName = document.getElementById('custName');
+const custAlamat = document.getElementById('custAlamat');
+const custWa = document.getElementById('custWa');
+checkoutBtn.addEventListener('click',()=>{
+  if(cart.length===0){alert('Cart kosong.');return;}
+  if(!custName.value.trim()||!custAlamat.value.trim()||!custWa.value.trim()){
+    alert('Mohon lengkapi data customer.');
+    return;
+  }
+  let msg = '🧾 INVOICE PEMESANAN%0A';
+  msg += '---------------------------------%0A';
+  msg += 'Item                 Qty   Subtotal%0A';
+  msg += '---------------------------------%0A';
+  let keluhanList = [];
+  cart.forEach(it=>{
+    let itemLine = it.service.padEnd(22,' ').substring(0,22)+' '+String(it.qty).padEnd(3,' ')+' '+formatRupiah(it.subtotal);
+    msg += itemLine+'%0A';
+    if(it.keluhan) keluhanList.push(it.keluhan);
+  });
+  msg += '---------------------------------%0A';
+  msg += 'TOTAL: '+grandTotalCell.textContent+'%0A';
+  msg += '---------------------------------%0A%0A';
+  msg += '👤 Customer Info:%0A';
+  msg += 'Nama: '+custName.value+'%0A';
+  msg += 'WhatsApp: '+custWa.value+'%0A';
+  msg += 'Alamat: '+custAlamat.value+'%0A';
+  if(keluhanList.length>0){
+    msg += 'Keluhan: '+keluhanList.join(', ')+'%0A';
+  }
+  msg += '%0A💳 Transfer Pembayaran ke:%0ABank BCA%20%20%0ANo. Rekening: 5315156669%20%20%0Aa/n Isfahani%0A%0A✅ Mohon kirim bukti transfer untuk konfirmasi.';
+  // Send to Bobelektronik WhatsApp
+  const bobWa = '6285715108388';
+  const waUrl = 'https://wa.me/'+bobWa+'?text='+msg;
+  window.open(waUrl,'_blank');
+});
+updateUI();
+})();</script>

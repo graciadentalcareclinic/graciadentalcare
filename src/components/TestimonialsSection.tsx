@@ -1,7 +1,5 @@
 
 import React from 'react';
-import SectionHeading from './SectionHeading';
-import { useTranslation } from '@/lib/TranslationProvider';
 import { Star } from 'lucide-react';
 
 type Testimonial = {
@@ -37,14 +35,13 @@ const testimonials: Testimonial[] = [
 ];
 
 const TestimonialsSection = () => {
-  const { t } = useTranslation();
   return (
     <section id="testimonials" className="py-20 bg-dental-blue-light">
       <div className="container-padding mx-auto">
         <div className="text-center mb-6">
           <span className="text-sm font-medium uppercase tracking-wider text-gray-500">TESTIMONIALS</span>
         </div>
-        <SectionHeading>{t('testimonials.heading')}</SectionHeading>
+        <h2 className="section-title text-center">What Our Patients Say</h2>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-10">
           {testimonials.map((testimonial) => (
@@ -53,7 +50,7 @@ const TestimonialsSection = () => {
                 <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
                   <img 
                     src={testimonial.image} 
-                    alt={`Photo of ${testimonial.name}, patient testimonial`} 
+                    alt={testimonial.name} 
                     className="w-full h-full object-cover"
                   />
                 </div>

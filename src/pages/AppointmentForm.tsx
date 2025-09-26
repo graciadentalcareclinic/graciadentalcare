@@ -95,8 +95,9 @@ const AppointmentForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (validateForm()) {
-      console.log('handleSubmit called', formData);
+      // WhatsApp message formatting
       const message =
         `New Appointment Request:%0A` +
         `Name: ${formData.name}%0A` +
@@ -107,7 +108,7 @@ const AppointmentForm: React.FC = () => {
         `Time: ${formData.time}%0A` +
         `Reason: ${formData.reason}%0A` +
         `New Patient: ${formData.isNewPatient ? 'Yes' : 'No'}`;
-      const whatsappUrl = `https://wa.me/6285210121788?text=${message}`;
+  const whatsappUrl = `https://wa.me/6289637507810?text=${message}`;
       window.open(whatsappUrl, '_blank');
       setIsSubmitted(true);
       setTimeout(() => {
@@ -273,26 +274,24 @@ const AppointmentForm: React.FC = () => {
                     <Clock className="h-4 w-4 mr-2 text-[var(--primary-color)]" />
                     Preferred Time
                   </label>
-                  <div className="w-full">
-                    <select
-                      name="time"
-                      value={formData.time}
-                      onChange={handleChange}
-                      className={`w-full p-3 border rounded-lg outline-none transition ${
-                        errors.time ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                    >
-                      <option value="">Select a time</option>
-                      <option value="9:00 AM">9:00 AM</option>
-                      <option value="10:00 AM">10:00 AM</option>
-                      <option value="11:00 AM">11:00 AM</option>
-                      <option value="12:00 PM">12:00 PM</option>
-                      <option value="1:00 PM">1:00 PM</option>
-                      <option value="2:00 PM">2:00 PM</option>
-                      <option value="3:00 PM">3:00 PM</option>
-                      <option value="4:00 PM">4:00 PM</option>
-                    </select>
-                  </div>
+                  <select
+                    name="time"
+                    value={formData.time}
+                    onChange={handleChange}
+                    className={`w-full p-3 border rounded-lg outline-none transition ${
+                      errors.time ? 'border-red-500' : 'border-gray-300'
+                    }`}
+                  >
+                    <option value="">Select a time</option>
+                    <option value="9:00 AM">9:00 AM</option>
+                    <option value="10:00 AM">10:00 AM</option>
+                    <option value="11:00 AM">11:00 AM</option>
+                    <option value="12:00 PM">12:00 PM</option>
+                    <option value="1:00 PM">1:00 PM</option>
+                    <option value="2:00 PM">2:00 PM</option>
+                    <option value="3:00 PM">3:00 PM</option>
+                    <option value="4:00 PM">4:00 PM</option>
+                  </select>
                   {errors.time && <p className="text-red-500 text-sm mt-1">{errors.time}</p>}
                 </div>
               </div>
