@@ -38,14 +38,10 @@ const Navbar = () => {
             className="h-8 w-8 rounded-full object-cover mr-4 border-2 border-dental-blue"
             style={{ minWidth: 32 }}
           />
-          <span
-            className="font-bold text-base md:text-xl lg:text-2xl tracking-tight whitespace-nowrap cursor-pointer relative overflow-hidden shine-mobile"
-            style={{ letterSpacing: '-0.01em' }}
-            tabIndex={0}
-          >
+          <Link to="/" tabIndex={0} className="font-bold text-base md:text-xl lg:text-2xl tracking-tight whitespace-nowrap cursor-pointer relative overflow-hidden shine-mobile" style={{ letterSpacing: '-0.01em' }}>
             Gracia Dental Care
             <span className="absolute inset-0 pointer-events-none hidden sm:block"></span>
-          </span>
+          </Link>
         </div>
 
         <div className="hidden md:flex items-center gap-8">
