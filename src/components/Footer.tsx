@@ -1,6 +1,10 @@
 
+import React from 'react';
+import { LanguageToggle } from './LanguageToggle';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const Footer = () => {
+  const { language, setLanguage: handleLanguageChange } = useLanguage();
   return (
     <footer id="contacts" className="bg-white pt-16 pb-8">
       <div className="container-padding mx-auto">
@@ -72,6 +76,14 @@ const Footer = () => {
         </div>
         
         <hr className="my-8 border-gray-200" />
+
+        <div className="mb-8">
+          <LanguageToggle
+            currentLanguage={language}
+            onLanguageChange={handleLanguageChange}
+            variant="footer"
+          />
+        </div>
         
         <div className="text-center text-gray-600">
           <p>© {new Date().getFullYear()} Gracia Dental Care. All Rights Reserved. Design by <a href="https://graciadentalcare.com" className="text-black hover:underline">graciadentalcare</a>. Website: <a href="https://graciadentalcare.com" className="text-black hover:underline">graciadentalcare.com</a></p>

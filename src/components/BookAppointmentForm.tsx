@@ -73,11 +73,54 @@ const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: Bo
 
   const sendToWhatsApp = (data: FormValues) => {
     const formattedDate = format(data.date, 'PPP');
-    let message = `New Appointment Request:%0AName: ${data.name}%0APhone: ${data.phone}%0ADate: ${formattedDate}%0ATime: ${data.time}%0ADoctor: ${doctorName}%0AReason: ${data.reason}`;
+    const currentDate = format(new Date(), 'PPP');
+    
+    // Create a visually appealing message format using emojis and formatting
+    let message = `
+🏥 *GRACIA DENTAL CARE*
+📋 *Appointment Details*
+
+Date: ${currentDate}
+Ref: GDC-${Math.random().toString(36).substring(2, 8).toUpperCase()}
+
+👤 *Patient Information*
+• Name: ${data.name}
+• Phone: ${data.phone}
+
+🗓️ *Appointment Schedule*
+• Date: ${formattedDate}
+• Time: ${data.time}
+• Doctor: ${doctorName}
+
+`;
+
     if (Array.isArray(selectedServices) && selectedServices.length > 0) {
-      message += `%0ASelected Services:%0A- ${selectedServices.join('%0A- ')}`;
+      message += `
+💉 *Selected Services*
+`;
+      selectedServices.forEach((service, index) => {
+        message += `${index + 1}. ${service}%0A`;
+      });
     }
-    const whatsappUrl = `https://wa.me/6289637507810?text=${message}`;
+
+    message += `
+📝 *Reason for Visit*
+${data.reason}
+
+✨ Thank you for choosing Gracia Dental Care!
+We will confirm your appointment shortly.
+
+Note: Please arrive 10 minutes before your scheduled time.
+`;
+
+    // Replace newlines and spaces for WhatsApp URL
+    const formattedMessage = message
+      .replace(/\n/g, '%0A')
+      .replace(/\s\s+/g, ' ')
+      .replace(/•/g, '%E2%80%A2')
+      .replace(/\*/g, '*');
+
+    const whatsappUrl = `https://wa.me/6289637507810?text=${formattedMessage}`;
     window.open(whatsappUrl, '_blank');
   };
 
@@ -158,7 +201,7 @@ const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: Bo
                       </Button>
                     </FormControl>
                   </PopoverTrigger>
-                  <PopoverContent className="w-auto p-0" align="start">
+                  <PopoverContent className="w-[280px] p-0" align="start">
                     <CalendarComponent
                       mode="single"
                       selected={field.value}
@@ -166,13 +209,10 @@ const BookAppointmentForm = ({ doctorId, doctorName, selectedServices = [] }: Bo
                       disabled={(date) => {
                         const today = new Date();
                         today.setHours(0, 0, 0, 0);
-                        if (date < today) return true;
-                        
-                        const dayOfWeek = date.getDay();
-                        const availableDays = getDoctorAvailability();
-                        return !availableDays.includes(dayOfWeek);
+                        return date < today;
                       }}
                       initialFocus
+                      className="rounded-md"
                     />
                   </PopoverContent>
                 </Popover>

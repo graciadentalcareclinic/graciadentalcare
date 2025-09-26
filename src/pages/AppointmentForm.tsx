@@ -243,24 +243,19 @@ const AppointmentForm: React.FC = () => {
                     type="date"
                     name="date"
                     value={formData.date}
+                    min={getTodayDate()}
                     onChange={e => {
                       const selectedDate = e.target.value;
-                      if (isPastDate(selectedDate)) {
-                        setErrors(prev => ({ ...prev, date: 'Cannot select a past date.' }));
-                        setFormData(prev => ({ ...prev, date: '' }));
-                        return;
-                      }
                       if (!isDateAvailable(selectedDate)) {
                         setErrors(prev => ({ ...prev, date: 'Selected day is not available for this doctor.' }));
-                        setFormData(prev => ({ ...prev, date: '' }));
                         return;
                       }
                       handleChange(e);
                     }}
-                    className={`w-full p-3 border rounded-lg outline-none transition ${
+                    className={`w-full p-3 border rounded-lg outline-none bg-white cursor-pointer ${
                       errors.date ? 'border-red-500' : 'border-gray-300'
                     }`}
-                    min={getTodayDate()}
+                    style={{ colorScheme: 'light' }}
                     disabled={!formData.doctor}
                   />
                   {!formData.doctor && (

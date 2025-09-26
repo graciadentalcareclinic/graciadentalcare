@@ -3,9 +3,13 @@ import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
+import { LanguageToggle } from './LanguageToggle';
+import { Language, getTranslation } from '@/lib/translations';
+import { useLanguage } from '@/lib/LanguageContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { language, setLanguage: handleLanguageChange } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,11 +36,11 @@ const Navbar = () => {
           <img
             src="/logo.jpg"
             alt="Gracia Dental Care Logo"
-            className="h-8 w-8 rounded-full object-cover mr-2 border-2 border-dental-blue"
+            className="h-8 w-8 rounded-full object-cover mr-4 border-2 border-dental-blue"
             style={{ minWidth: 32 }}
           />
           <span
-            className="font-bold text-base md:text-xl lg:text-2xl tracking-tight whitespace-nowrap transition-transform duration-150 transform hover:scale-110 focus:scale-110 cursor-pointer"
+            className="font-bold text-base md:text-xl lg:text-2xl tracking-tight whitespace-nowrap cursor-pointer"
             style={{ letterSpacing: '-0.01em' }}
             tabIndex={0}
           >
@@ -45,18 +49,38 @@ const Navbar = () => {
         </div>
 
         <div className="hidden md:flex items-center gap-8">
-          <Link to="/services" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">Services</Link>
-          <a href="#doctors" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">Doctors</a>
-          <a href="#about" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">About Us</a>
-          <Link to="contacts" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">Contacts</Link>
+          <Link to="/services" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">
+            {getTranslation('nav.services', language)}
+          </Link>
+          <Link to="/promo" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">
+            {getTranslation('nav.promo', language)}
+          </Link>
+          <Link to="/#doctors" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">
+            {getTranslation('nav.doctors', language)}
+          </Link>
+          <Link to="/#about" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">
+            {getTranslation('nav.about', language)}
+          </Link>
+          <Link to="/contacts" className="text-sm font-medium hover:text-dental-blue-dark transition-colors transform hover:scale-110 focus:scale-110 duration-150">
+            {getTranslation('nav.contact', language)}
+          </Link>
         </div>
 
-        <Link to="contacts">
-          <Button className="btn-primary px-3 py-2 text-sm md:px-6 md:py-3 md:text-base">
-            <span className="block md:hidden">Book Appointment</span>
-            <span className="hidden md:inline">Book an Appointment</span>
-          </Button>
-        </Link>
+        <div className="flex items-center gap-4">
+          <div className="hidden md:block">
+            <LanguageToggle
+              currentLanguage={language}
+              onLanguageChange={handleLanguageChange}
+              variant="navbar"
+            />
+          </div>
+          <Link to="/contacts">
+            <Button className="btn-primary px-3 py-2 text-sm md:px-6 md:py-3 md:text-base">
+              <span className="block md:hidden">{getTranslation('nav.book', language)}</span>
+              <span className="hidden md:inline">{getTranslation('nav.book', language)}</span>
+            </Button>
+          </Link>
+        </div>
       </div>
     </nav>
   );
