@@ -5,6 +5,22 @@ import BookAppointmentForm from '@/components/BookAppointmentForm';
 import { Button } from '@/components/ui/button';
 
 const SERVICES = [
+	// Scaling category and subcategories
+	{
+		category: 'Scaling',
+		name: 'Supragingival Scaling',
+		description: 'Removal of plaque and calculus above the gum line on the visible tooth surface.'
+	},
+	{
+		category: 'Scaling',
+		name: 'Subgingival Scaling',
+		description: 'Cleaning below the gum line, targeting deposits in periodontal pockets.'
+	},
+	{
+		category: 'Scaling',
+		name: 'Deep Scaling / Root Planing',
+		description: 'Intensive cleaning that includes scaling and smoothing the root surfaces to treat periodontitis.'
+	},
 	// Implant category and subcategories
 	{
 		category: 'Implant',
