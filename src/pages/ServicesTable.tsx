@@ -208,104 +208,133 @@ const SERVICES = [
 ];
 
 const ServicesTable: React.FC = () => {
-	const [selected, setSelected] = useState<string[]>([]);
-	const [showAppointmentModal, setShowAppointmentModal] = useState(false);
+   const [selected, setSelected] = useState<string[]>([]);
+   const [showAppointmentModal, setShowAppointmentModal] = useState(false);
+   // Category filter state
+   const categories = Array.from(new Set(SERVICES.map(s => s.category)));
+   const [activeCategory, setActiveCategory] = useState<string>('All');
 
-	const handleAdd = (service: string) => {
-		if (!selected.includes(service)) {
-			setSelected(prev => {
-				setTimeout(() => {
-					const el = document.getElementById('selected-services');
-					if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-				}, 100);
-				return [...prev, service];
-			});
-		}
-	};
-	const handleRemove = (service: string) => {
-		setSelected(selected.filter(s => s !== service));
-	};
-	// Dummy scroll handlers for FloatingMenu
-	const scrollToSection = (id: string) => {
-		const el = document.getElementById(id);
-		if (el) el.scrollIntoView({ behavior: 'smooth' });
-	};
+   const handleAdd = (service: string) => {
+	   if (!selected.includes(service)) {
+		   setSelected(prev => {
+			   setTimeout(() => {
+				   const el = document.getElementById('selected-services');
+				   if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+			   }, 100);
+			   return [...prev, service];
+		   });
+	   }
+   };
+   const handleRemove = (service: string) => {
+	   setSelected(selected.filter(s => s !== service));
+   };
+   // Dummy scroll handlers for FloatingMenu
+   const scrollToSection = (id: string) => {
+	   const el = document.getElementById(id);
+	   if (el) el.scrollIntoView({ behavior: 'smooth' });
+   };
 
-	return (
-		<div className="min-h-screen">
-			<Navbar />
-			<div className="container-padding mx-auto pt-14 pb-12">
-				<h1 className="text-3xl font-bold mb-6">Dental Services</h1>
-				<div className="mb-8">
-					{/* Table for desktop, cards for mobile */}
-					<div className="hidden sm:block">
-						<table className="min-w-full bg-white border rounded-lg shadow">
-							<thead>
-								<tr>
-									<th className="px-4 py-2 border-b">Category</th>
-									<th className="px-4 py-2 border-b">Service</th>
-									<th className="px-4 py-2 border-b">Description</th>
-									<th className="px-4 py-2 border-b">Action</th>
-								</tr>
-							</thead>
-							<tbody>
-								{SERVICES.map((svc, idx) => (
-									<tr key={idx} className="hover:bg-gray-50">
-										<td className="px-4 py-2 border-b">{svc.category}</td>
-										<td className="px-4 py-2 border-b">{svc.name}</td>
-										<td className="px-4 py-2 border-b">{svc.description}</td>
-										<td className="px-4 py-2 border-b">
-											{selected.includes(svc.name) ? (
-												<Button
-													variant="destructive"
-													size="sm"
-													onClick={() => handleRemove(svc.name)}
-												>
-													Remove
-												</Button>
-											) : (
-												<Button
-													variant="secondary"
-													size="sm"
-													onClick={() => handleAdd(svc.name)}
-												>
-													Add Service
-												</Button>
-											)}
-										</td>
-									</tr>
-								))}
-							</tbody>
-						</table>
-					</div>
-					<div className="sm:hidden flex flex-col gap-4">
-						{SERVICES.map((svc, idx) => (
-							<div key={idx} className="bg-white rounded-lg shadow p-4 border">
-								<div className="text-xs text-gray-500 mb-1 font-semibold">{svc.category}</div>
-								<div className="font-bold text-base mb-1">{svc.name}</div>
-								<div className="text-gray-700 mb-2 text-sm">{svc.description}</div>
-								<div>
-									{selected.includes(svc.name) ? (
-										<Button
-											variant="destructive"
-											size="sm"
-											onClick={() => handleRemove(svc.name)}
-										>
-											Remove
-										</Button>
-									) : (
-										<Button
-											variant="secondary"
-											size="sm"
-											onClick={() => handleAdd(svc.name)}
-										>
-											Add Service
-										</Button>
-									)}
-								</div>
-							</div>
-						))}
-					</div>
+   // Filtered services
+   const filteredServices = activeCategory === 'All'
+	   ? SERVICES
+	   : SERVICES.filter(s => s.category === activeCategory);
+
+   return (
+	   <div className="min-h-screen">
+		   <Navbar />
+		   <div className="container-padding mx-auto pt-14 pb-12">
+			   <h1 className="text-3xl font-bold mb-6">Dental Services</h1>
+			   {/* Category Filter Bar */}
+			   <div className="mb-6 flex flex-wrap items-center gap-2">
+				   <span className="text-sm font-semibold mr-2" style={{ color: '#2563eb' }}>Category</span>
+				   <button
+					   className={`px-4 py-1 rounded-full border text-sm font-medium transition-colors ${activeCategory === 'All' ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-blue-100'}`}
+					   onClick={() => setActiveCategory('All')}
+				   >
+					   All
+				   </button>
+				   {categories.map(cat => (
+					   <button
+						   key={cat}
+						   className={`px-4 py-1 rounded-full border text-sm font-medium transition-colors ${activeCategory === cat ? 'bg-blue-600 text-white' : 'bg-gray-100 text-gray-700 hover:bg-blue-100'}`}
+						   onClick={() => setActiveCategory(cat)}
+					   >
+						   {cat}
+					   </button>
+				   ))}
+			   </div>
+			   <div className="mb-8">
+				   {/* Table for desktop, cards for mobile */}
+					   <div className="hidden sm:block">
+						   <table className="min-w-full bg-white border rounded-lg shadow">
+							   <thead>
+								   <tr>
+									   <th className="px-4 py-2 border-b">Category</th>
+									   <th className="px-4 py-2 border-b">Service</th>
+									   <th className="px-4 py-2 border-b">Description</th>
+									   <th className="px-4 py-2 border-b">Action</th>
+								   </tr>
+							   </thead>
+							   <tbody>
+								   {filteredServices.map((svc, idx) => (
+									   <tr key={idx} className="hover:bg-gray-50">
+										   <td className="px-4 py-2 border-b">{svc.category}</td>
+										   <td className="px-4 py-2 border-b">{svc.name}</td>
+										   <td className="px-4 py-2 border-b">{svc.description}</td>
+										   <td className="px-4 py-2 border-b">
+											   <div className="flex items-center justify-center">
+												   {selected.includes(svc.name) ? (
+													   <Button
+														   variant="destructive"
+														   size="sm"
+														   onClick={() => handleRemove(svc.name)}
+													   >
+														   Remove
+													   </Button>
+												   ) : (
+													   <Button
+														   variant="secondary"
+														   size="sm"
+														   onClick={() => handleAdd(svc.name)}
+													   >
+														   Add Service
+													   </Button>
+												   )}
+											   </div>
+										   </td>
+									   </tr>
+								   ))}
+							   </tbody>
+						   </table>
+					   </div>
+					   <div className="sm:hidden flex flex-col gap-4">
+						   {filteredServices.map((svc, idx) => (
+							   <div key={idx} className="bg-white rounded-lg shadow p-4 border flex flex-col">
+								   <div className="text-xs text-gray-500 mb-1 font-semibold">{svc.category}</div>
+								   <div className="font-bold text-base mb-1">{svc.name}</div>
+								   <div className="text-gray-700 mb-2 text-sm">{svc.description}</div>
+								   <div className="flex items-center justify-center mt-2">
+									   {selected.includes(svc.name) ? (
+										   <Button
+											   variant="destructive"
+											   size="sm"
+											   onClick={() => handleRemove(svc.name)}
+										   >
+											   Remove
+										   </Button>
+									   ) : (
+										   <Button
+											   variant="secondary"
+											   size="sm"
+											   onClick={() => handleAdd(svc.name)}
+										   >
+											   Add Service
+										   </Button>
+									   )}
+								   </div>
+							   </div>
+						   ))}
+					   </div>
 				</div>
 				<div className="mb-8" id="selected-services">
 					<h2 className="text-xl font-semibold mb-2">Selected Services</h2>
@@ -323,11 +352,7 @@ const ServicesTable: React.FC = () => {
 					<BookAppointmentForm doctorId={0} doctorName="" selectedServices={selected} />
 				</div>
 			</div>
-			<FloatingMenu
-				onAppointmentClick={() => setShowAppointmentModal(true)}
-				onServicesClick={() => scrollToSection('selected-services')}
-				onPromoClick={() => scrollToSection('promo')}
-			/>
+			   <FloatingMenu />
 		</div>
 	);
 };
