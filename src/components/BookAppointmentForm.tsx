@@ -120,7 +120,7 @@ Note: Please arrive 10 minutes before your scheduled time.
       .replace(/•/g, '%E2%80%A2')
       .replace(/\*/g, '*');
 
-    const whatsappUrl = `https://wa.me/6289637507810?text=${formattedMessage}`;
+    const whatsappUrl = `https://wa.me/6285210121788?text=${formattedMessage}`;
     window.open(whatsappUrl, '_blank');
   };
 
