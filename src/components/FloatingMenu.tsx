@@ -33,10 +33,11 @@ const FloatingMenu: React.FC = () => {
   const BottomMenu = () => (
     <nav className="fixed bottom-0 left-0 right-0 z-50 flex justify-around items-center py-2 bg-white shadow-2xl border-t border-gray-200 md:hidden">
       <button className="flex flex-col items-center flex-1 focus:outline-none" onClick={handleWhatsAppClick}>
-        <svg className="floating-menu-icon" width="20" height="20" fill="none" viewBox="0 0 24 24">
-          <path fill="#0ea5e9" d="M12 2C6.48 2 2 6.48 2 12c0 2.01.75 3.85 2 5.28V22l4.09-2.18C9.46 19.93 10.71 20 12 20c5.52 0 10-4.48 10-10S17.52 2 12 2Zm-1.25 14.5c-2.5-1.09-4.25-3.09-4.25-5.5 0-3.04 2.96-5.5 6.5-5.5s6.5 2.46 6.5 5.5-2.96 5.5-6.5 5.5c-.41 0-.81-.03-1.2-.08l-2.3 1.22.25-2.14Z"/>
+        <svg className="floating-menu-icon" width="20" height="20" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#25D366"/>
+          <path d="M22.5 18.7c-.3-.2-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.3-.8-.7-1.3-1.5-1.5-1.8-.2-.3 0-.4.1-.6.1-.1.2-.2.3-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.2.1-.3 0-.5-.1-.2-.7-1.7-.9-2.3-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-1.1 1.1-1.1 2.7 0 1.6 1.2 3.1 1.4 3.3.2.2 2.3 3.6 5.7 3.6 1.6 0 2.7-.7 3.1-1.1.4-.4.7-1.1.8-1.5.1-.4.1-.7.1-.8 0-.1-.1-.2-.2-.3z" fill="#fff"/>
         </svg>
-        <span className="text-xs mt-1 font-semibold text-sky-500" style={{ fontFamily: 'inherit' }}>WhatsApp</span>
+        <span className="text-xs mt-1 font-semibold text-[#25D366]" style={{ fontFamily: 'inherit' }}>WhatsApp</span>
       </button>
       <button className="flex flex-col items-center flex-1 focus:outline-none" onClick={handleServicesClick}>
         <svg className="floating-menu-icon" width="20" height="20" fill="none" viewBox="0 0 24 24">
@@ -63,8 +64,9 @@ const FloatingMenu: React.FC = () => {
   const SideMenu = () => (
     <nav className="fixed bottom-2 right-2 z-50 flex flex-col items-center gap-2 px-1 py-2 rounded-xl shadow-xl bg-gradient-to-b from-navy-900 via-sky-400 to-purple-900 md:flex hidden" style={{ minHeight: 120, maxHeight: 200 }}>
       <button className="flex items-center justify-center p-1 rounded-lg bg-white/80 hover:bg-sky-100 transition focus:outline-none group" style={{ width: 32, height: 32 }} onClick={handleWhatsAppClick}>
-        <svg className="floating-menu-icon transition-transform duration-200 group-hover:scale-110" width="18" height="18" fill="none" viewBox="0 0 24 24">
-          <path fill="#0ea5e9" d="M12 2C6.48 2 2 6.48 2 12c0 2.01.75 3.85 2 5.28V22l4.09-2.18C9.46 19.93 10.71 20 12 20c5.52 0 10-4.48 10-10S17.52 2 12 2Zm-1.25 14.5c-2.5-1.09-4.25-3.09-4.25-5.5 0-3.04 2.96-5.5 6.5-5.5s6.5 2.46 6.5 5.5-2.96 5.5-6.5 5.5c-.41 0-.81-.03-1.2-.08l-2.3 1.22.25-2.14Z"/>
+        <svg className="floating-menu-icon transition-transform duration-200 group-hover:scale-110" width="18" height="18" viewBox="0 0 32 32" fill="none">
+          <circle cx="16" cy="16" r="16" fill="#25D366"/>
+          <path d="M22.5 18.7c-.3-.2-1.7-.8-2-1-.3-.1-.5-.2-.7.1-.2.3-.8 1-.9 1.1-.2.2-.3.2-.6.1-.3-.2-1.2-.4-2.3-1.3-.8-.7-1.3-1.5-1.5-1.8-.2-.3 0-.4.1-.6.1-.1.2-.2.3-.3.1-.1.1-.2.2-.3.1-.1.1-.2.2-.3.1-.2.1-.3 0-.5-.1-.2-.7-1.7-.9-2.3-.2-.6-.4-.5-.6-.5h-.5c-.2 0-.5.1-.7.3-.2.2-1.1 1.1-1.1 2.7 0 1.6 1.2 3.1 1.4 3.3.2.2 2.3 3.6 5.7 3.6 1.6 0 2.7-.7 3.1-1.1.4-.4.7-1.1.8-1.5.1-.4.1-.7.1-.8 0-.1-.1-.2-.2-.3z" fill="#fff"/>
         </svg>
       </button>
       <button className="flex items-center justify-center p-1 rounded-lg bg-white/80 hover:bg-sky-100 transition focus:outline-none group" style={{ width: 32, height: 32 }} onClick={handleServicesClick}>
