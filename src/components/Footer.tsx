@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { LanguageToggle } from './LanguageToggle';
 import { useLanguage } from '@/lib/LanguageContext';
@@ -8,6 +7,7 @@ const Footer = () => {
   return (
     <footer id="contacts" className="bg-white pt-16 pb-8">
       <div className="container-padding mx-auto">
+        {/* Restore Quick Links & Services to original stacked layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           <div>
             <div className="flex items-center mb-4">
@@ -31,7 +31,6 @@ const Footer = () => {
               </a>
             </div>
           </div>
-          
           <div>
             <h4 className="font-semibold text-lg mb-4">Quick Links</h4>
             <ul className="space-y-2">
@@ -42,7 +41,6 @@ const Footer = () => {
               <li><a href="#testimonials" className="text-gray-600 hover:text-black">Testimonials</a></li>
             </ul>
           </div>
-          
           <div>
             <h4 className="font-semibold text-lg mb-4">Services</h4>
             <ul className="space-y-2">
@@ -53,29 +51,57 @@ const Footer = () => {
               <li><a href="#" className="text-gray-600 hover:text-black">Pediatric Dentistry</a></li>
             </ul>
           </div>
-          
+        </div>
+        
+        {/* Modern Embedded Google Map with Clinic Details - no box/border */}
+        <div className="w-full mb-0 mt-0 md:mt-[-16px] grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
           <div>
-            <h4 className="font-semibold text-lg mb-4">Contact Us</h4>
-            <address className="not-italic">
-              <div className="mb-2 text-gray-600">
+            <iframe
+              title="Gracia Dental Care Map"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3966.312073964479!2d106.7820194749937!3d-6.222964993768763!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f6e2e2e2e2e3%3A0x2e2e2e2e2e2e2e2e!2sGracia%20Dental%20Care!5e0!3m2!1sen!2sid!4v1695740000000!5m2!1sen!2sid"
+              width="100%"
+              height="220"
+              style={{ border: 0, borderRadius: '16px' }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            ></iframe>
+            <div className="p-3">
+              <div className="font-bold text-lg text-sky-700">Gracia Dental Care</div>
+              <div className="text-gray-700 text-sm mb-2">
                 <strong>Address:</strong> Jl. Kavling Polri No.1606 Blok F8, RT.8/RW.2, Jelambar, Kec. Grogol petamburan, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11460
               </div>
-              <div className="mb-2 text-gray-600">
+              <div className="text-gray-700 text-sm mb-2">
                 <strong>Phone:</strong> <a href="tel:+62215658561" className="hover:text-black">(021) 5658561</a>
               </div>
-              <div className="mb-2 text-gray-600">
+              <div className="text-gray-700 text-sm mb-2">
                 <strong>Email:</strong> <a href="mailto:info@graciadentalcare.com" className="hover:text-black">info@graciadentalcare.com</a>
               </div>
-              <div className="text-gray-600">
+              <div className="text-gray-700 text-sm">
                 <strong>Jam Praktek:</strong><br />
                 Senin, Selasa, Kamis : 10.00-21.00<br />
                 Rabu, Jumat : 10.00-17.00
               </div>
-            </address>
+            </div>
+          </div>
+          <div>
+            <h4 className="font-semibold text-lg mb-2">Instagram</h4>
+            <div className="text-xs text-gray-500 mb-1">
+              <a href="https://www.instagram.com/graciadentalcare/" target="_blank" rel="noopener noreferrer" className="hover:text-sky-700 font-semibold">@graciadentalcare</a>
+            </div>
+            <div className="w-full">
+              <iframe
+                src="https://snapwidget.com/embed/1108781"
+                title="Posts from Instagram"
+                className="snapwidget-widget w-full h-[220px] md:h-[320px] lg:h-[510px] rounded-lg border-none"
+                allowTransparency
+                frameBorder="0"
+                scrolling="no"
+                style={{ border: 'none', overflow: 'hidden', width: '100%' }}
+              ></iframe>
+            </div>
           </div>
         </div>
-        
-        <hr className="my-8 border-gray-200" />
 
         <div className="mb-8">
           <LanguageToggle
