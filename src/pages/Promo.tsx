@@ -109,7 +109,7 @@ const Promo: React.FC = () => {
           {services.map((service) => (
             <div
               key={service.id}
-              className="bg-white rounded-xl shadow-md p-6 hover:shadow-lg transition-shadow"
+              className="bg-white rounded-xl shadow-md p-6 transition-all duration-200 hover:shadow-lg hover:scale-[1.03]"
             >
               <h3 className="text-lg font-semibold text-gray-900 mb-2">{service.name}</h3>
               <p className="text-gray-700 mb-4">{service.description}</p>

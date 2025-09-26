@@ -89,17 +89,25 @@ const Footer = () => {
             <div className="text-xs text-gray-500 mb-1">
               <a href="https://www.instagram.com/graciadentalcare/" target="_blank" rel="noopener noreferrer" className="hover:text-sky-700 font-semibold">@graciadentalcare</a>
             </div>
-            <div className="w-full">
+            <a
+              href="https://www.instagram.com/graciadentalcare/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block w-full relative group"
+              aria-label="View Instagram posts"
+              style={{ textDecoration: 'none' }}
+            >
               <iframe
                 src="https://snapwidget.com/embed/1108781"
                 title="Posts from Instagram"
-                className="snapwidget-widget w-full h-[220px] md:h-[320px] lg:h-[510px] rounded-lg border-none"
+                className="snapwidget-widget w-full h-[220px] md:h-[320px] lg:h-[510px] rounded-lg border-none pointer-events-none group-hover:opacity-90"
                 allowTransparency
                 frameBorder="0"
                 scrolling="no"
                 style={{ border: 'none', overflow: 'hidden', width: '100%' }}
               ></iframe>
-            </div>
+              <span className="absolute inset-0 cursor-pointer" style={{ zIndex: 2 }}></span>
+            </a>
           </div>
         </div>
 
